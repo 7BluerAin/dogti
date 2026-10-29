@@ -3,72 +3,40 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>测测你是什么小狗 🐕</title>
+<title>DogTi 测测你是什么小狗</title>
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:"system-ui","PingFang SC","Microsoft YaHei",sans-serif;}
-body{background:#f7f7f9;color:#222;padding:0;min-height:100vh;}
-.wrapper{max-width:420px;margin:0 auto;background:#fff;min-height:100vh;padding:24px;}
-
-/* 开始页 */
-#start-page{text-align:center;padding-top:120px;}
-#start-page h1{font-size:28px;margin-bottom:12px;}
-#start-page p{color:#666;margin-bottom:40px;line-height:1.6;}
-.btn{width:100%;padding:14px 0;background:#222;color:#fff;border:none;border-radius:10px;font-size:16px;cursor:pointer;margin:8px 0;transition:0.2s;}
-.btn:active{opacity:0.85;}
-.btn.secondary{background:#6c757d;}
-
-/* 答题页面 */
-#quiz-page{display:none;}
-.progress-text{text-align:center;color:#888;margin-bottom:24px;}
-.question{font-size:18px;font-weight:500;margin-bottom:28px;line-height:1.6;}
-.option{padding:16px 14px;border:1px solid #ddd;border-radius:10px;margin-bottom:12px;cursor:pointer;transition:0.15s;}
-.option:hover{background:#f4f4f6;border-color:#aaa;}
-.option:active{background:#ececf0;}
-
-/* 结果页 */
-#result-page{display:none;text-align:center;}
-.result-img{width:140px;height:140px;margin:20px auto;border-radius:12px;background:#eee;display:flex;align-items:center;justify-content:center;font-size:60px;}
-.result-title{font-size:24px;font-weight:bold;margin:12px 0 6px;}
-.result-subtitle{color:#777;margin-bottom:24px;}
-.result-desc{text-align:left;line-height:1.7;color:#444;margin-bottom:24px;}
-.tags-wrap{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:24px;justify-content:center;}
-.tag{background:#f0f0f4;padding:6px 12px;border-radius:20px;font-size:13px;color:#444;}
-.canvas-box{margin:16px 0}
-#shareCanvas{border-radius:12px;max-width:100%;box-shadow:0 2px 10px #00000015}
-.hide{display:none !important;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:system-ui,-apple-system,sans-serif;background:#f5f1ea;color:#222;}
+.btn{border:none;border-radius:999px;padding:14px 48px;font-size:16px;cursor:pointer;letter-spacing:2px;}
+.btn.secondary{background:#eee;color:#333;}
+.option.selected>span{background-color:#333;border-color:#333;}
+.page{display:none;}
 </style>
 </head>
 <body>
-<div class="wrapper">
 
-<!-- 开始页面 -->
+<!-- ========== 【你的封面开始页 直接沿用】 ========== -->
 <div id="start-page" style="text-align:center;padding:56px 28px 40px;background:#f5f1ea;min-height:100vh;">
-
     <!-- 顶部小标题 -->
     <div style="font-size:13px;color:#666;letter-spacing:2px;margin-bottom:18px;">
         测测你是什么小狗
     </div>
-
-    <!-- 插入第二张小狗图 -->
+    <!-- 封面小狗图 -->
     <div style="margin:0 auto 24px;max-width:360px;border-radius:18px;overflow:hidden;box-shadow:0 10px 30px rgba(0,0,0,0.12);">
         <img src="dog-cover.jpg" alt="小狗封面" style="width:100%;display:block;" />
     </div>
-
     <!-- 主标题 -->
     <h1 style="font-size:34px;font-weight:800;color:#222;margin-bottom:10px;letter-spacing:1px;">
         dogti
     </h1>
-
     <!-- 副标题 -->
     <p style="font-size:16px;color:#444;margin-bottom:32px;">
         测测你是什么小狗 (´・ω・｀)
     </p>
-
     <!-- 开始按钮 -->
     <button class="btn" id="startBtn" style="background:#222;color:#fff;border:none;border-radius:999px;padding:14px 48px;font-size:16px;cursor:pointer;letter-spacing:2px;">
         开始测试
     </button>
-
     <!-- 说明文字 -->
     <div style="margin-top:18px;font-size:12px;color:#888;line-height:1.6;">
         24题 测出你的小狗人格<br/>
@@ -77,360 +45,625 @@ body{background:#f7f7f9;color:#222;padding:0;min-height:100vh;}
 </div>
 
 
-    <!-- 答题页面 -->
-    <div id="quiz-page">
-        <div class="progress-text"><span id="current-num">1</span> / <span id="total-num">24</span></div>
-        <div class="question" id="q-text"></div>
-        <div id="opt-container"></div>
+<!-- ========== 第1题 ========== -->
+<div id="q1" class="question-page" style="display:none;text-align:center;padding:40px 24px;background:#f5f1ea;min-height:100vh;box-sizing:border-box;">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
+        <button onclick="prevQuestion()" style="background:none;border:none;font-size:22px;color:#333;">←</button>
+        <span style="font-size:18px;color:#666;">1 / 24</span>
+        <span style="font-size:16px;color:#888;">DogTi</span>
     </div>
-
-    <!-- 结果页 -->
-    <div id="result-page">
-        <div class="result-img" id="res-emoji">🐶</div>
-        <div class="result-title" id="res-name">小狗名称</div>
-        <div class="result-subtitle" id="res-sub">副标题</div>
-        <div class="result-desc" id="res-desc"></div>
-        <div class="tags-wrap" id="res-tags"></div>
-        <div class="canvas-box">
-            <canvas id="shareCanvas" width="360" height="480"></canvas>
+    <div style="width:100%;height:4px;background:#ddd;border-radius:2px;margin-bottom:40px;">
+        <div style="width:calc(1/24*100%);height:4px;background:#444;border-radius:2px;"></div>
+    </div>
+    <div style="margin:0 auto 16px;max-width:220px;">
+        <img src="dog-question.jpg" alt="小狗" style="width:100%;"/>
+    </div>
+    <p style="font-size:15px;color:#555;margin:0 0 12px;">01 · 独处</p>
+    <h2 style="font-size:32px;color:#222;margin:0 0 48px;line-height:1.4;">周末空闲，你更愿意？</h2>
+    <div style="text-align:left;max-width:600px;margin:0 auto;">
+        <div class="option" onclick="selectOption(1,0)" style="border:1px solid #d9d4cb;border-radius:12px;padding:20px;margin-bottom:16px;cursor:pointer;font-size:18px;display:flex;gap:12px;align-items:center;">
+            <span style="width:16px;height:16px;border:1px solid #999;border-radius:50%;display:inline-block;"></span>
+            自己安静待着，享受独处
         </div>
-        <button class="btn" id="saveImgBtn">保存海报图片</button>
-        <button class="btn secondary" id="restartBtn">再测一次</button>
-        <button class="btn secondary" id="shareBtn">复制链接分享</button>
+        <div class="option" onclick="selectOption(1,1)" style="border:1px solid #d9d4cb;border-radius:12px;padding:20px;margin-bottom:16px;cursor:pointer;font-size:18px;display:flex;gap:12px;align-items:center;">
+            <span style="width:16px;height:16px;border:1px solid #999;border-radius:50%;display:inline-block;"></span>
+            约朋友一起出门玩耍
+        </div>
+        <div class="option" onclick="selectOption(1,2)" style="border:1px solid #d9d4cb;border-radius:12px;padding:20px;margin-bottom:16px;cursor:pointer;font-size:18px;display:flex;gap:12px;align-items:center;">
+            <span style="width:16px;height:16px;border:1px solid #999;border-radius:50%;display:inline-block;"></span>
+            看情况，两种都可以
+        </div>
     </div>
-
 </div>
 
-<script>
-// ========== 24道题目｜每题4选项｜E/I S/N T/F J/P 四维度计分（MBTI体系，方便16种结果） ==========
-const questions = [
-    {q:"休息的时候你更偏向？",opts:[
-        {text:"主动约朋友出门玩",score:{E:2,I:0}},
-        {text:"找一两个熟人小聚聊天",score:{E:1,I:1}},
-        {text:"自己安排独处活动",score:{E:0,I:2}},
-        {text:"随缘，看当天心情",score:{E:1,I:1}}
-    ]},
-    {q:"获取新信息时，你更喜欢？",opts:[
-        {text:"关注真实细节、实际经验",score:{S:2,N:0}},
-        {text:"先看案例和现实反馈",score:{S:1,N:1}},
-        {text:"琢磨背后的联想与可能性",score:{S:0,N:2}},
-        {text:"喜欢脑洞和隐喻解读",score:{S:0,N:2}}
-    ]},
-    {q:"做决定优先依靠？",opts:[
-        {text:"逻辑、利弊、客观道理",score:{T:2,F:0}},
-        {text:"权衡公平和规则",score:{T:1,F:1}},
-        {text:"照顾他人感受与氛围",score:{T:0,F:2}},
-        {text:"遵从内心好恶与共情",score:{T:0,F:2}}
-    ]},
-    {q:"面对日程计划，你习惯？",opts:[
-        {text:"提前规划，尽量不改动",score:{J:2,P:0}},
-        {text:"有大致框架，尽量遵守",score:{J:1,P:1}},
-        {text:"灵活随性，走一步看一步",score:{J:0,P:2}},
-        {text:"讨厌被计划束缚",score:{J:0,P:2}}
-    ]},
-    {q:"参加陌生聚会，你会？",opts:[
-        {text:"主动搭话认识新朋友",score:{E:2,I:0}},
-        {text:"熟人带动下慢慢放开",score:{E:1,I:1}},
-        {text:"安静旁观，很少发言",score:{E:0,I:2}},
-        {text:"只和认识的人待在一起",score:{E:0,I:2}}
-    ]},
-    {q:"别人向你描述一件事，你更在意？",opts:[
-        {text:"具体发生了什么细节",score:{S:2,N:0}},
-        {text:"事情的过程经过",score:{S:1,N:1}},
-        {text:"这件事带来的启发",score:{S:0,N:2}},
-        {text:"背后隐藏的含义",score:{S:0,N:2}}
-    ]},
-    {q:"朋友和你倾诉烦恼，你倾向？",opts:[
-        {text:"帮他梳理问题、给出方案",score:{T:2,F:0}},
-        {text:"客观分析对错得失",score:{T:1,F:1}},
-        {text:"共情陪伴，安抚情绪",score:{T:0,F:2}},
-        {text:"优先照顾对方心情",score:{T:0,F:2}}
-    ]},
-    {q:"任务截止前，你通常？",opts:[
-        {text:"早早做完，心里踏实",score:{J:2,P:0}},
-        {text:"分步完成，不拖到最后",score:{J:1,P:1}},
-        {text:"临近截止才开始冲刺",score:{J:0,P:2}},
-        {text:"不到最后一刻没有动力",score:{J:0,P:2}}
-    ]},
-    {q:"长时间独处之后，你会？",opts:[
-        {text:"想找人聊天、出门社交",score:{E:2,I:0}},
-        {text:"可以，但不需要太多人",score:{E:1,I:1}},
-        {text:"觉得舒服，不想被打扰",score:{E:0,I:2}},
-        {text:"独处是充电最好方式",score:{E:0,I:2}}
-    ]},
-    {q:"学习新东西，你偏爱？",opts:[
-        {text:"实操、案例、看得见效果",score:{S:2,N:0}},
-        {text:"先看步骤、教程、实例",score:{S:1,N:1}},
-        {text:"先理解原理和框架",score:{S:0,N:2}},
-        {text:"喜欢理论、猜想、创新思路",score:{S:0,N:2}}
-    ]},
-    {q:"发生矛盾争执，你更看重？",opts:[
-        {text:"道理对错，事实本身",score:{T:2,F:0}},
-        {text:"规则是否公平合理",score:{T:1,F:1}},
-        {text:"不要伤害彼此感情",score:{T:0,F:2}},
-        {text:"维持和谐，减少冲突",score:{T:0,F:2}}
-    ]},
-    {q:"房间或者待办清单，你喜欢？",opts:[
-        {text:"整齐有序，归类收纳",score:{J:2,P:0}},
-        {text:"大体整洁，不乱就行",score:{J:1,P:1}},
-        {text:"随性摆放，自有秩序",score:{J:0,P:2}},
-        {text:"不喜欢条条框框整理",score:{J:0,P:2}}
-    ]},
-    {q:"看到热闹有趣的活动，你会？",opts:[
-        {text:"立刻报名，积极参与",score:{E:2,I:0}},
-        {text:"有人陪我就去",score:{E:1,I:1}},
-        {text:"看看就好，不一定参加",score:{E:0,I:2}},
-        {text:"人多会觉得疲惫",score:{E:0,I:2}}
-    ]},
-    {q:"别人夸奖你的时候，你更认可？",opts:[
-        {text:"务实、靠谱、落地能力强",score:{S:2,N:0}},
-        {text:"细心稳重，注重细节",score:{S:1,N:1}},
-        {text:"脑洞大、想法新颖独特",score:{S:0,N:2}},
-        {text:"善于联想、富有灵感",score:{S:0,N:2}}
-    ]},
-    {q:"团队合作出现分歧，你会？",opts:[
-        {text:"就事论事，理性讨论",score:{T:2,F:0}},
-        {text:"权衡利弊找到最优解",score:{T:1,F:1}},
-        {text:"顾及大家感受，缓和气氛",score:{T:0,F:2}},
-        {text:"尽量避免正面争吵",score:{T:0,F:2}}
-    ]},
-    {q:"旅行规划，你更喜欢？",opts:[
-        {text:"做好路线，打卡清单",score:{J:2,P:0}},
-        {text:"有简单行程安排",score:{J:1,P:1}},
-        {text:"只定目的地，随便逛",score:{J:0,P:2}},
-        {text:"完全随心，即兴游玩",score:{J:0,P:2}}
-    ]},
-    {q:"表达想法的时候，你一般？",opts:[
-        {text:"想到就说，乐于分享",score:{E:2,I:0}},
-        {text:"合适时机再开口",score:{E:1,I:1}},
-        {text:"先在心里反复打磨",score:{E:0,I:2}},
-        {text:"很少主动表达观点",score:{E:0,I:2}}
-    ]},
-    {q:"判断一件事情能不能做，优先？",opts:[
-        {text:"现实条件、资源限制",score:{S:2,N:0}},
-        {text:"过往类似的经验",score:{S:1,N:1}},
-        {text:"可能性、未来潜力",score:{S:0,N:2}},
-        {text:"想象可以变成什么样",score:{S:0,N:2}}
-    ]},
-    {q:"评价一部作品，你更看重？",opts:[
-        {text:"逻辑严谨，自洽合理",score:{T:2,F:0}},
-        {text:"设定和规则通顺",score:{T:1,F:1}},
-        {text:"情绪感染力、共情力",score:{T:0,F:2}},
-        {text:"能不能打动内心",score:{T:0,F:2}}
-    ]},
-    {q:"遇到突发变化，你的第一反应？",opts:[
-        {text:"慌乱，希望恢复原定计划",score:{J:2,P:0}},
-        {text:"快速调整方案应对",score:{J:1,P:1}},
-        {text:"也行，换个玩法",score:{J:0,P:2}},
-        {text:"反而觉得新鲜有趣",score:{J:0,P:2}}
-    ]},
-    {q:"灵感枯竭的时候，你会选择？",opts:[
-        {text:"找人聊天激发想法",score:{E:2,I:0}},
-        {text:"和好友简单交流",score:{E:1,I:1}},
-        {text:"独处安静慢慢思考",score:{E:0,I:2}},
-        {text:"自己散步放空思考",score:{E:0,I:2}}
-    ]},
-    {q:"你更相信哪一句话？",opts:[
-        {text:"眼见为实，经验可靠",score:{S:2,N:0}},
-        {text:"实践之后才有发言权",score:{S:1,N:1}},
-        {text:"一切皆有可能",score:{S:0,N:2}},
-        {text:"想象力比经验重要",score:{S:0,N:2}}
-    ]},
-    {q:"朋友做了让你不舒服的事，你会？",opts:[
-        {text:"理性沟通，讲清边界",score:{T:2,F:0}},
-        {text:"客观说明哪里不妥",score:{T:1,F:1}},
-        {text:"默默包容，怕伤害对方",score:{T:0,F:2}},
-        {text:"隐忍，等对方察觉",score:{T:0,F:2}}
-    ]},
-    {q:"对于任务收尾，你习惯？",opts:[
-        {text:"尽早闭环，了结事情",score:{J:2,P:0}},
-        {text:"按时完成，不拖延",score:{J:1,P:1}},
-        {text:"拖着，不急着收尾",score:{J:0,P:2}},
-        {text:"喜欢留一点弹性空间",score:{J:0,P:2}}
-    ]}
-];
+<!-- ========== 第2题 ========== -->
+<div id="q2" class="question-page" style="display:none;text-align:center;padding:40px 24px;background:#f5f1ea;min-height:100vh;box-sizing:border-box;">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
+        <button onclick="prevQuestion()" style="background:none;border:none;font-size:22px;color:#333;">←</button>
+        <span style="font-size:18px;color:#666;">2 / 24</span>
+        <span style="font-size:16px;color:#888;">DogTi</span>
+    </div>
+    <div style="width:100%;height:4px;background:#ddd;border-radius:2px;margin-bottom:40px;">
+        <div style="width:calc(2/24*100%);height:4px;background:#444;border-radius:2px;"></div>
+    </div>
+    <div style="margin:0 auto 16px;max-width:220px;">
+        <img src="dog-question.jpg" alt="小狗" style="width:100%;"/>
+    </div>
+    <p style="font-size:15px;color:#555;margin:0 0 12px;">02 · 计划</p>
+    <h2 style="font-size:32px;color:#222;margin:0 0 48px;line-height:1.4;">出行安排，你习惯？</h2>
+    <div style="text-align:left;max-width:600px;margin:0 auto;">
+        <div class="option" onclick="selectOption(2,0)" style="border:1px solid #d9d4cb;border-radius:12px;padding:20px;margin-bottom:16px;cursor:pointer;font-size:18px;display:flex;gap:12px;align-items:center;">
+            <span style="width:16px;height:16px;border:1px solid #999;border-radius:50%;display:inline-block;"></span>
+            提前做好详细计划
+        </div>
+        <div class="option" onclick="selectOption(2,1)" style="border:1px solid #d9d4cb;border-radius:12px;padding:20px;margin-bottom:16px;cursor:pointer;font-size:18px;display:flex;gap:12px;align-items:center;">
+            <span style="width:16px;height:16px;border:1px solid #999;border-radius:50%;display:inline-block;"></span>
+            随性出发，走一步看一步
+        </div>
+        <div class="option" onclick="selectOption(2,2)" style="border:1px solid #d9d4cb;border-radius:12px;padding:20px;margin-bottom:16px;cursor:pointer;font-size:18px;display:flex;gap:12px;align-items:center;">
+            <span style="width:16px;height:16px;border:1px solid #999;border-radius:50%;display:inline-block;"></span>
+            有大致方向，细节随缘
+        </div>
+    </div>
+</div>
 
-// ========== 16种小狗结果，对应MBTI16型 ==========
-const resultList = [
-    {key:"ESTJ",emoji:"🦮",name:"干练德牧",subtitle:"秩序守护者",desc:"你务实果断，重视规则与责任，做事干脆利落，擅长统筹安排。靠谱有执行力，很适合带领大家完成目标，只是偶尔会忽略细腻情绪。",tags:["果断","负责","执行力强","守秩序"]},
-    {key:"ESTP",emoji:"🐕",name:"活力比特",subtitle:"当下行动派",desc:"热爱新鲜刺激，反应敏捷，擅长临场应变。活在当下，动手能力很强，喜欢直接的体验，不喜欢空洞冗长的理论。",tags:["灵活","大胆","临场强","热爱体验"]},
-    {key:"ESFJ",emoji:"🐕",name:"暖心拉布拉多",subtitle:"温暖东道主",desc:"友善体贴，善于照顾身边人的感受，擅长维系氛围。乐于付出，重视人际和谐，很容易让人信任，有时容易过度迁就别人。",tags:["体贴","热心","人缘好","擅长共情"]},
-    {key:"ESFP",emoji:"🐶",name:"元气柯基",subtitle:"快乐氛围机",desc:"活泼明媚，自带感染力，很擅长捕捉当下的快乐。喜欢热闹，表达直白鲜活，能轻松带动气氛，耐心偏少，讨厌枯燥重复。",tags:["乐观","鲜活","氛围感强","热爱热闹"]},
-    {key:"ENTJ",emoji:"🐕‍🦺",name:"霸气罗威纳",subtitle:"天生指挥官",desc:"目标感极强，思路锐利，擅长规划布局。自信有魄力，喜欢挑战难题，追求效率和成果，容易给人强势、压迫的感觉。",tags:["有魄力","目标明确","善于谋划","追求效率"]},
-    {key:"ENTP",emoji:"🐺",name:"脑洞哈士奇",subtitle:"辩论捣蛋鬼",desc:"好奇心爆炸，喜欢思辨抬杠，讨厌死板教条。想法层出不穷，享受头脑碰撞，三分钟热度，很难长期沉在单调事务里。",tags:["脑洞大","爱思辨","自由叛逆","想法多"]},
-    {key:"ENFJ",emoji:"🐕",name:"治愈金毛",subtitle:"温柔引路人",desc:"善于看见别人潜力，共情力极强，愿意鼓励陪伴身边的人。心怀善意，有理想感，容易背负别人的情绪，内耗较重。",tags:["温柔治愈","善于鼓励","理想主义","共情拉满"]},
-    {key:"ENFP",emoji:"🐶",name:"灵动贵宾",subtitle:"浪漫追梦小狗",desc:"浪漫富有想象力，内心世界丰富，对一切抱有期待。热情柔软，讨厌束缚，灵感源源不断，计划常常容易半途而废。",tags:["浪漫","柔软","想象力强","热爱自由"]},
-    {key:"ISTJ",emoji:"🐕",name:"稳重伯恩山",subtitle:"踏实实干家",desc:"严谨细心，信守承诺，稳扎稳打。尊重传统与经验，做事认真可靠，不喜欢冒风险，有时会不容易接纳新变化。",tags:["稳重","细心","守信","踏实保守"]},
-    {key:"ISTP",emoji:"🐕‍🦺",name:"冷静杜宾",subtitle:"巧手解谜者",desc:"冷静内敛，动手能力优秀，擅长拆解问题。偏爱实操，喜欢独立解决难题，话不多，不擅长表达细腻情绪。",tags:["冷静","动手强","独立","擅长拆解"]},
-    {key:"ISFJ",emoji:"🐶",name:"温顺柴犬",subtitle:"默默守护者",desc:"安静内敛，默默记住别人的喜好，悄悄照顾身边人。忠诚长情，习惯付出，不擅长主动索取，容易压抑自己需求。",tags:["内敛","长情","细心体贴","默默付出"]},
-    {key:"ISFP",emoji:"🐾",name:"软萌比熊",subtitle:"感官艺术家",desc:"温柔敏感，审美细腻，偏爱安静舒服的节奏。忠于自己感受，不喜欢冲突，享受当下美好，不太擅长长远规划。",tags:["温柔敏感","审美细腻","热爱美好","随感受走"]},
-    {key:"INTJ",emoji:"🐺",name:"睿智边牧",subtitle:"战略思考家",desc:"洞察力出众，擅长长远推演，自带一套完整逻辑体系。独立清醒，追求真知，不喜欢无意义社交，距离感明显。",tags:["睿智","洞察力强","独立清醒","擅长规划"]},
-    {key:"INTP",emoji:"🐕",name:"佛系雪纳瑞",subtitle:"好奇思考者",desc:"喜欢沉浸在思考、逻辑和猜想里，内心世界浩瀚。随性松弛，对人情应酬无感，经常走神放空，执行力偏弱。",tags:["爱思考","松弛佛系","脑洞深邃","不爱应酬"]},
-    {key:"INFJ",emoji:"🐕",name:"灵韵喜乐蒂",subtitle:"内省预言家",desc:"通透内敛，能读懂隐藏的情绪与动机，内心有坚定的信念。共情深刻，独处充电，很难完全敞开心扉，常常孤独。",tags:["通透内敛","信念坚定","深度共情","喜欢独处"]},
-    {key:"INFP",emoji:"🐶",name:"柔软马尔济斯",subtitle:"理想小诗人",desc:"内心柔软真诚，忠于自己价值观，拥有浪漫精神世界。敏感细腻，讨厌虚伪冲突，需要大量独处空间修复自己。",tags:["真诚柔软","理想主义","细腻敏感","精神丰富"]}
-];
+<!-- ========== 第3题 ========== -->
+<div id="q3" class="question-page" style="display:none;text-align:center;padding:40px 24px;background:#f5f1ea;min-height:100vh;box-sizing:border-box;">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
+        <button onclick="prevQuestion()" style="background:none;border:none;font-size:22px;color:#333;">←</button>
+        <span style="font-size:18px;color:#666;">3 / 24</span>
+        <span style="font-size:16px;color:#888;">DogTi</span>
+    </div>
+    <div style="width:100%;height:4px;background:#ddd;border-radius:2px;margin-bottom:40px;">
+        <div style="width:calc(3/24*100%);height:4px;background:#444;border-radius:2px;"></div>
+    </div>
+    <div style="margin:0 auto 16px;max-width:220px;">
+        <img src="dog-question.jpg" alt="小狗" style="width:100%;"/>
+    </div>
+    <p style="font-size:15px;color:#555;margin:0 0 12px;">03 · 买单</p>
+    <h2 style="font-size:32px;color:#222;margin:0 0 48px;line-height:1.4;">出去吃饭结账，你？</h2>
+    <div style="text-align:left;max-width:600px;margin:0 auto;">
+        <div class="option" onclick="selectOption(3,0)" style="border:1px solid #d9d4cb;border-radius:12px;padding:20px;margin-bottom:16px;cursor:pointer;font-size:18px;display:flex;gap:12px;align-items:center;">
+            <span style="width:16px;height:16px;border:1px solid #999;border-radius:50%;display:inline-block;"></span>
+            我来，为老婆花钱天经地义
+        </div>
+        <div class="option" onclick="selectOption(3,1)" style="border:1px solid #d9d4cb;border-radius:12px;padding:20px;margin-bottom:16px;cursor:pointer;font-size:18px;display:flex;gap:12px;align-items:center;">
+            <span style="width:16px;height:16px;border:1px solid #999;border-radius:50%;display:inline-block;"></span>
+            狠狠依赖一把
+        </div>
+        <div class="option" onclick="selectOption(3,2)" style="border:1px solid #d9d4cb;border-radius:12px;padding:20px;margin-bottom:16px;cursor:pointer;font-size:18px;display:flex;gap:12px;align-items:center;">
+            <span style="width:16px;height:16px;border:1px solid #999;border-radius:50%;display:inline-block;"></span>
+            有来有回
+        </div>
+    </div>
+</div>
 
-// ========== 页面DOM ==========
-const startPage = document.getElementById("start-page");
-const quizPage = document.getElementById("quiz-page");
-const resultPage = document.getElementById("result-page");
-const startBtn = document.getElementById("startBtn");
-const restartBtn = document.getElementById("restartBtn");
-const shareBtn = document.getElementById("shareBtn");
-const saveImgBtn = document.getElementById("saveImgBtn");
+<!-- ========== 第4题 ========== -->
+<div id="q4" class="question-page" style="display:none;text-align:center;padding:40px 24px;background:#f5f1ea;min-height:100vh;box-sizing:border-box;">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
+        <button onclick="prevQuestion()" style="background:none;border:none;font-size:22px;color:#333;">←</button>
+        <span style="font-size:18px;color:#666;">4 / 24</span>
+        <span style="font-size:16px;color:#888;">DogTi</span>
+    </div>
+    <div style="width:100%;height:4px;background:#ddd;border-radius:2px;margin-bottom:40px;">
+        <div style="width:calc(4/24*100%);height:4px;background:#444;border-radius:2px;"></div>
+    </div>
+    <div style="margin:0 auto 16px;max-width:220px;">
+        <img src="dog-question.jpg" alt="小狗" style="width:100%;"/>
+    </div>
+    <p style="font-size:15px;color:#555;margin:0 0 12px;">04 · 冲突</p>
+    <h2 style="font-size:32px;color:#222;margin:0 0 48px;line-height:1.4;">和人产生矛盾，你一般？</h2>
+    <div style="text-align:left;max-width:600px;margin:0 auto;">
+        <div class="option" onclick="selectOption(4,0)" style="border:1px solid #d9d4cb;border-radius:12px;padding:20px;margin-bottom:16px;cursor:pointer;font-size:18px;display:flex;gap:12px;align-items:center;">
+            <span style="width:16px;height:16px;border:1px solid #999;border-radius:50%;display:inline-block;"></span>
+            当场沟通，尽快解决
+        </div>
+        <div class="option" onclick="selectOption(4,1)" style="border:1px solid #d9d4cb;border-radius:12px;padding:20px;margin-bottom:16px;cursor:pointer;font-size:18px;display:flex;gap:12px;align-items:center;">
+            <span style="width:16px;height:16px;border:1px solid #999;border-radius:50%;display:inline-block;"></span>
+            先冷静，晚点再说
+        </div>
+        <div class="option" onclick="selectOption(4,2)" style="border:1px solid #d9d4cb;border-radius:12px;padding:20px;margin-bottom:16px;cursor:pointer;font-size:18px;display:flex;gap:12px;align-items:center;">
+            <span style="width:16px;height:16px;border:1px solid #999;border-radius:50%;display:inline-block;"></span>
+            尽量回避，不想争吵
+        </div>
+    </div>
+</div>
 
-const qText = document.getElementById("q-text");
-const optContainer = document.getElementById("opt-container");
-const currentNumEl = document.getElementById("current-num");
-const totalNumEl = document.getElementById("total-num");
+<!-- ========== 第5题 ========== -->
+<div id="q5" class="question-page" style="display:none;text-align:center;padding:40px 24px;background:#f5f1ea;min-height:100vh;box-sizing:border-box;">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
+        <button onclick="prevQuestion()" style="background:none;border:none;font-size:22px;color:#333;">←</button>
+        <span style="font-size:18px;color:#666;">5 / 24</span>
+        <span style="font-size:16px;color:#888;">DogTi</span>
+    </div>
+    <div style="width:100%;height:4px;background:#ddd;border-radius:2px;margin-bottom:40px;">
+        <div style="width:calc(5/24*100%);height:4px;background:#444;border-radius:2px;"></div>
+    </div>
+    <div style="margin:0 auto 16px;max-width:220px;">
+        <img src="dog-question.jpg" alt="小狗" style="width:100%;"/>
+    </div>
+    <p style="font-size:15px;color:#555;margin:0 0 12px;">05 · 夸奖</p>
+    <h2 style="font-size:32px;color:#222;margin:0 0 48px;line-height:1.4;">收到别人夸奖，你会？</h2>
+    <div style="text-align:left;max-width:600px;margin:0 auto;">
+        <div class="option" onclick="selectOption(5,0)" style="border:1px solid #d9d4cb;border-radius:12px;padding:20px;margin-bottom:16px;cursor:pointer;font-size:18px;display:flex;gap:12px;align-items:center;">
+            <span style="width:16px;height:16px;border:1px solid #999;border-radius:50%;display:inline-block;"></span>
+            大方接受，开心道谢
+        </div>
+        <div class="option" onclick="selectOption(5,1)" style="border:1px solid #d9d4cb;border-radius:12px;padding:20px;margin-bottom:16px;cursor:pointer;font-size:18px;display:flex;gap:12px;align-items:center;">
+            <span style="width:16px;height:16px;border:1px solid #999;border-radius:50%;display:inline-block;"></span>
+            有点害羞，委婉推辞
+        </div>
+        <div class="option" onclick="selectOption(5,2)" style="border:1px solid #d9d4cb;border-radius:12px;padding:20px;margin-bottom:16px;cursor:pointer;font-size:18px;display:flex;gap:12px;align-items:center;">
+            <span style="width:16px;height:16px;border:1px solid #999;border-radius:50%;display:inline-block;"></span>
+            心里怀疑对方客套
+        </div>
+    </div>
+</div>
 
-const resEmoji = document.getElementById("res-emoji");
-const resName = document.getElementById("res-name");
-const resSub = document.getElementById("res-sub");
-const resDesc = document.getElementById("res-desc");
-const resTags = document.getElementById("res-tags");
-const canvas = document.getElementById("shareCanvas");
-const ctx = canvas.getContext("2d");
+<!-- ========== 第6题 ========== -->
+<div id="q6" class="question-page" style="display:none;text-align:center;padding:40px 24px;background:#f5f1ea;min-height:100vh;box-sizing:border-box;">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
+        <button onclick="prevQuestion()" style="background:none;border:none;font-size:22px;color:#333;">←</button>
+        <span style="font-size:18px;color:#666;">6 / 24</span>
+        <span style="font-size:16px;color:#888;">DogTi</span>
+    </div>
+    <div style="width:100%;height:4px;background:#ddd;border-radius:2px;margin-bottom:40px;">
+        <div style="width:calc(6/24*100%);height:4px;background:#444;border-radius:2px;"></div>
+    </div>
+    <div style="margin:0 auto 16px;max-width:220px;">
+        <img src="dog-question.jpg" alt="小狗" style="width:100%;"/>
+    </div>
+    <p style="font-size:15px;color:#555;margin:0 0 12px;">06 · 消息</p>
+    <h2 style="font-size:32px;color:#222;margin:0 0 48px;line-height:1.4;">看到未读消息，你？</h2>
+    <div style="text-align:left;max-width:600px;margin:0 auto;">
+        <div class="option" onclick="selectOption(6,0)" style="border:1px solid #d9d4cb;border-radius:12px;padding:20px;margin-bottom:16px;cursor:pointer;font-size:18px;display:flex;gap:12px;align-items:center;">
+            <span style="width:16px;height:16px;border:1px solid #999;border-radius:50%;display:inline-block;"></span>
+            看到就马上回复
+        </div>
+        <div class="option" onclick="selectOption(6,1)" style="border:1px solid #d9d4cb;border-radius:12px;padding:20px;margin-bottom:16px;cursor:pointer;font-size:18px;display:flex;gap:12px;align-items:center;">
+            <span style="width:16px;height:16px;border:1px solid #999;border-radius:50%;display:inline-block;"></span>
+            有空的时候再回
+        </div>
+        <div class="option" onclick="selectOption(6,2)" style="border:1px solid #d9d4cb;border-radius:12px;padding:20px;margin-bottom:16px;cursor:pointer;font-size:18px;display:flex;gap:12px;align-items:center;">
+            <span style="width:16px;height:16px;border:1px solid #999;border-radius:50%;display:inline-block;"></span>
+            不想回就放着不回复
+        </div>
+    </div>
+</div>
 
-let currentQ = 0;
-let score = {E:0,I:0,S:0,N:0,T:0,F:0,J:0,P:0};
+<!-- ========== 第7题 ========== -->
+<div id="q7" class="question-page" style="display:none;text-align:center;padding:40px 24px;background:#f5f1ea;min-height:100vh;box-sizing:border-box;">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
+        <button onclick="prevQuestion()" style="background:none;border:none;font-size:22px;color:#333;">←</button>
+        <span style="font-size:18px;color:#666;">7 / 24</span>
+        <span style="font-size:16px;color:#888;">DogTi</span>
+    </div>
+    <div style="width:100%;height:4px;background:#ddd;border-radius:2px;margin-bottom:40px;">
+        <div style="width:calc(7/24*100%);height:4px;background:#444;border-radius:2px;"></div>
+    </div>
+    <div style="margin:0 auto 16px;max-width:220px;">
+        <img src="dog-question.jpg" alt="小狗" style="width:100%;"/>
+    </div>
+    <p style="font-size:15px;color:#555;margin:0 0 12px;">07 · 压力</p>
+    <h2 style="font-size:32px;color:#222;margin:0 0 48px;line-height:1.4;">压力大的时候，你会？</h2>
+    <div style="text-align:left;max-width:600px;margin:0 auto;">
+        <div class="option" onclick="selectOption(7,0)" style="border:1px solid #d9d4cb;border-radius:12px;padding:20px;margin-bottom:16px;cursor:pointer;font-size:18px;display:flex;gap:12px;align-items:center;">
+            <span style="width:16px;height:16px;border:1px solid #999;border-radius:50%;display:inline-block;"></span>
+            找人倾诉释放情绪
+        </div>
+        <div class="option" onclick="selectOption(7,1)" style="border:1px solid #d9d4cb;border-radius:12px;padding:20px;margin-bottom:16px;cursor:pointer;font-size:18px;display:flex;gap:12px;align-items:center;">
+            <span style="width:16px;height:16px;border:1px solid #999;border-radius:50%;display:inline-block;"></span>
+            独自消化，自己扛住
+        </div>
+        <div class="option" onclick="selectOption(7,2)" style="border:1px solid #d9d4cb;border-radius:12px;padding:20px;margin-bottom:16px;cursor:pointer;font-size:18px;display:flex;gap:12px;align-items:center;">
+            <span style="width:16px;height:16px;border:1px solid #999;border-radius:50%;display:inline-block;"></span>
+            转移注意力做点别的
+        </div>
+    </div>
+</div>
 
-function showPage(pageName){
-    startPage.style.display = "none";
-    quizPage.style.display = "none";
-    resultPage.style.display = "none";
-    if(pageName === "start") startPage.style.display = "block";
-    if(pageName === "quiz") quizPage.style.display = "block";
-    if(pageName === "result") resultPage.style.display = "block";
-}
+<!-- ========== 第8题 ========== -->
+<div id="q8" class="question-page" style="display:none;text-align:center;padding:40px 24px;background:#f5f1ea;min-height:100vh;box-sizing:border-box;">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
+        <button onclick="prevQuestion()" style="background:none;border:none;font-size:22px;color:#333;">←</button>
+        <span style="font-size:18px;color:#666;">8 / 24</span>
+        <span style="font-size:16px;color:#888;">DogTi</span>
+    </div>
+    <div style="width:100%;height:4px;background:#ddd;border-radius:2px;margin-bottom:40px;">
+        <div style="width:calc(8/24*100%);height:4px;background:#444;border-radius:2px;"></div>
+    </div>
+    <div style="margin:0 auto 16px;max-width:220px;">
+        <img src="dog-question.jpg" alt="小狗" style="width:100%;"/>
+    </div>
+    <p style="font-size:15px;color:#555;margin:0 0 12px;">08 · 选择</p>
+    <h2 style="font-size:32px;color:#222;margin:0 0 48px;line-height:1.4;">做重大选择，你更相信？</h2>
+    <div style="text-align:left;max-width:600px;margin:0 auto;">
+        <div class="option" onclick="selectOption(8,0)" style="border:1px solid #d9d4cb;border-radius:12px;padding:20px;margin-bottom:16px;cursor:pointer;font-size:18px;display:flex;gap:12px;align-items:center;">
+            <span style="width:16px;height:16px;border:1px solid #999;border-radius:50%;display:inline-block;"></span>
+            理性分析利弊
+        </div>
+        <div class="option" onclick="selectOption(8,1)" style="border:1px solid #d9d4cb;border-radius:12px;padding:20px;margin-bottom:16px;cursor:pointer;font-size:18px;display:flex;gap:12px;align-items:center;">
+            <span style="width:16px;height:16px;border:1px solid #999;border-radius:50%;display:inline-block;"></span>
+            直觉和内心感受
+        </div>
+        <div class="option" onclick="selectOption(8,2)" style="border:1px solid #d9d4cb;border-radius:12px;padding:20px;margin-bottom:16px;cursor:pointer;font-size:18px;display:flex;gap:12px;align-items:center;">
+            <span style="width:16px;height:16px;border:1px solid #999;border-radius:50%;display:inline-block;"></span>
+            参考别人的建议
+        </div>
+    </div>
+</div>
 
-function renderQuestion(){
-    const q = questions[currentQ];
-    totalNumEl.innerText = questions.length;
-    currentNumEl.innerText = currentQ + 1;
-    qText.innerText = q.q;
-    optContainer.innerHTML = "";
+<!-- ========== 第9题 ========== -->
+<div id="q9" class="question-page" style="display:none;text-align:center;padding:40px 24px;background:#f5f1ea;min-height:100vh;box-sizing:border-box;">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
+        <button onclick="prevQuestion()" style="background:none;border:none;font-size:22px;color:#333;">←</button>
+        <span style="font-size:18px;color:#666;">9 / 24</span>
+        <span style="font-size:16px;color:#888;">DogTi</span>
+    </div>
+    <div style="width:100%;height:4px;background:#ddd;border-radius:2px;margin-bottom:40px;">
+        <div style="width:calc(9/24*100%);height:4px;background:#444;border-radius:2px;"></div>
+    </div>
+    <div style="margin:0 auto 16px;max-width:220px;">
+        <img src="dog-question.jpg" alt="小狗" style="width:100%;"/>
+    </div>
+    <p style="font-size:15px;color:#555;margin:0 0 12px;">09 · 评价</p>
+    <h2 style="font-size:32px;color:#222;margin:0 0 48px;line-height:1.4;">别人对你负面评价，你？</h2>
+    <div style="text-align:left;max-width:600px;margin:0 auto;">
+        <div class="option" onclick="selectOption(9,0)" style="border:1px solid #d9d4cb;border-radius:12px;padding:20px;margin-bottom:16px;cursor:pointer;font-size:18px;display:flex;gap:12px;align-items:center;">
+            <span style="width:16px;height:16px;border:1px solid #999;border-radius:50%;display:inline-block;"></span>
+            认真反思自己问题
+        </div>
+        <div class="option" onclick="selectOption(9,1)" style="border:1px solid #d9d4cb;border-radius:12px;padding:20px;margin-bottom:16px;cursor:pointer;font-size:18px;display:flex;gap:12px;align-items:center;">
+            <span style="width:16px;height:16px;border:1px solid #999;border-radius:50%;display:inline-block;"></span>
+            心里难过很久
+        </div>
+        <div class="option" onclick="selectOption(9,2)" style="border:1px solid #d9d4cb;border-radius:12px;padding:20px;margin-bottom:16px;cursor:pointer;font-size:18px;display:flex;gap:12px;align-items:center;">
+            <span style="width:16px;height:16px;border:1px solid #999;border-radius:50%;display:inline-block;"></span>
+            不在意，一笑而过
+        </div>
+    </div>
+</div>
 
-    q.opts.forEach(opt => {
-        const div = document.createElement("div");
-        div.className = "option";
-        div.innerText = opt.text;
-        div.onclick = () => {
-            Object.keys(opt.score).forEach(k => {
-                score[k] += opt.score[k];
-            });
-            currentQ++;
-            if(currentQ >= questions.length){
-                showResult();
-            } else {
-                renderQuestion();
-            }
-        };
-        optContainer.appendChild(div);
-    });
-}
+<!-- ========== 第10题 ========== -->
+<div id="q10" class="question-page" style="display:none;text-align:center;padding:40px 24px;background:#f5f1ea;min-height:100vh;box-sizing:border-box;">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
+        <button onclick="prevQuestion()" style="background:none;border:none;font-size:22px;color:#333;">←</button>
+        <span style="font-size:18px;color:#666;">10 / 24</span>
+        <span style="font-size:16px;color:#888;">DogTi</span>
+    </div>
+    <div style="width:100%;height:4px;background:#ddd;border-radius:2px;margin-bottom:40px;">
+        <div style="width:calc(10/24*100%);height:4px;background:#444;border-radius:2px;"></div>
+    </div>
+    <div style="margin:0 auto 16px;max-width:220px;">
+        <img src="dog-question.jpg" alt="小狗" style="width:100%;"/>
+    </div>
+    <p style="font-size:15px;color:#555;margin:0 0 12px;">10 · 守约</p>
+    <h2 style="font-size:32px;color:#222;margin:0 0 48px;line-height:1.4;">约定好见面，你会？</h2>
+    <div style="text-align:left;max-width:600px;margin:0 auto;">
+        <div class="option" onclick="selectOption(10,0)" style="border:1px solid #d9d4cb;border-radius:12px;padding:20px;margin-bottom:16px;cursor:pointer;font-size:18px;display:flex;gap:12px;align-items:center;">
+            <span style="width:16px;height:16px;border:1px solid #999;border-radius:50%;display:inline-block;"></span>
+            提前到达，绝不迟到
+        </div>
+        <div class="option" onclick="selectOption(10,1)" style="border:1px solid #d9d4cb;border-radius:12px;padding:20px;margin-bottom:16px;cursor:pointer;font-size:18px;display:flex;gap:12px;align-items:center;">
+            <span style="width:16px;height:16px;border:1px solid #999;border-radius:50%;display:inline-block;"></span>
+            卡点准时到场
+        </div>
+        <div class="option" onclick="selectOption(10,2)" style="border:1px solid #d9d4cb;border-radius:12px;padding:20px;margin-bottom:16px;cursor:pointer;font-size:18px;display:flex;gap:12px;align-items:center;">
+            <span style="width:16px;height:16px;border:1px solid #999;border-radius:50%;display:inline-block;"></span>
+            偶尔会迟到一会
+        </div>
+    </div>
+</div>
 
-// 计算4字母类型
-function getDogType(){
-    const ei = score.E >= score.I ? "E":"I";
-    const sn = score.S >= score.N ? "S":"N";
-    const tf = score.T >= score.F ? "T":"F";
-    const jp = score.J >= score.P ? "J":"P";
-    return ei+sn+tf+jp;
-}
+<!-- ========== 第11题 ========== -->
+<div id="q11" class="question-page" style="display:none;text-align:center;padding:40px 24px;background:#f5f1ea;min-height:100vh;box-sizing:border-box;">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
+        <button onclick="prevQuestion()" style="background:none;border:none;font-size:22px;color:#333;">←</button>
+        <span style="font-size:18px;color:#666;">11 / 24</span>
+        <span style="font-size:16px;color:#888;">DogTi</span>
+    </div>
+    <div style="width:100%;height:4px;background:#ddd;border-radius:2px;margin-bottom:40px;">
+        <div style="width:calc(11/24*100%);height:4px;background:#444;border-radius:2px;"></div>
+    </div>
+    <div style="margin:0 auto 16px;max-width:220px;">
+        <img src="dog-question.jpg" alt="小狗" style="width:100%;"/>
+    </div>
+    <p style="font-size:15px;color:#555;margin:0 0 12px;">11 · 脑洞</p>
+    <h2 style="font-size:32px;color:#222;margin:0 0 48px;line-height:1.4;">空闲时脑海经常？</h2>
+    <div style="text-align:left;max-width:600px;margin:0 auto;">
+        <div class="option" onclick="selectOption(11,0)" style="border:1px solid #d9d4cb;border-radius:12px;padding:20px;margin-bottom:16px;cursor:pointer;font-size:18px;display:flex;gap:12px;align-items:center;">
+            <span style="width:16px;height:16px;border:1px solid #999;border-radius:50%;display:inline-block;"></span>
+            幻想各种故事画面
+        </div>
+        <div class="option" onclick="selectOption(11,1)" style="border:1px solid #d9d4cb;border-radius:12px;padding:20px;margin-bottom:16px;cursor:pointer;font-size:18px;display:flex;gap:12px;align-items:center;">
+            <span style="width:16px;height:16px;border:1px solid #999;border-radius:50%;display:inline-block;"></span>
+            思考现实待办事情
+        </div>
+        <div class="option" onclick="selectOption(11,2)" style="border:1px solid #d9d4cb;border-radius:12px;padding:20px;margin-bottom:16px;cursor:pointer;font-size:18px;display:flex;gap:12px;align-items:center;">
+            <span style="width:16px;height:16px;border:1px solid #999;border-radius:50%;display:inline-block;"></span>
+            放空，什么都不想
+        </div>
+    </div>
+</div>
 
-// 绘制海报Canvas
-function drawPoster(item){
-    ctx.fillStyle="#fffaf5";
-    ctx.fillRect(0,0,canvas.width,canvas.height);
+<!-- ========== 第12题 ========== -->
+<div id="q12" class="question-page" style="display:none;text-align:center;padding:40px 24px;background:#f5f1ea;min-height:100vh;box-sizing:border-box;">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
+        <button onclick="prevQuestion()" style="background:none;border:none;font-size:22px;color:#333;">←</button>
+        <span style="font-size:18px;color:#666;">12 / 24</span>
+        <span style="font-size:16px;color:#888;">DogTi</span>
+    </div>
+    <div style="width:100%;height:4px;background:#ddd;border-radius:2px;margin-bottom:40px;">
+        <div style="width:calc(12/24*100%);height:4px;background:#444;border-radius:2px;"></div>
+    </div>
+    <div style="margin:0 auto 16px;max-width:220px;">
+        <img src="dog-question.jpg" alt="小狗" style="width:100%;"/>
+    </div>
+    <p style="font-size:15px;color:#555;margin:0 0 12px;">12 · 学习</p>
+    <h2 style="font-size:32px;color:#222;margin:0 0 48px;line-height:1.4;">学新东西，更喜欢？</h2>
+    <div style="text-align:left;max-width:600px;margin:0 auto;">
+        <div class="option" onclick="selectOption(12,0)" style="border:1px solid #d9d4cb;border-radius:12px;padding:20px;margin-bottom:16px;cursor:pointer;font-size:18px;display:flex;gap:12px;align-items:center;">
+            <span style="width:16px;height:16px;border:1px solid #999;border-radius:50%;display:inline-block;"></span>
+            系统按步骤学习
+        </div>
+        <div class="option" onclick="selectOption(12,1)" style="border:1px solid #d9d4cb;border-radius:12px;padding:20px;margin-bottom:16px;cursor:pointer;font-size:18px;display:flex;gap:12px;align-items:center;">
+            <span style="width:16px;height:16px;border:1px solid #999;border-radius:50%;display:inline-block;"></span>
+            感兴趣就零散了解
+        </div>
+        <div class="option" onclick="selectOption(12,2)" style="border:1px solid #d9d4cb;border-radius:12px;padding:20px;margin-bottom:16px;cursor:pointer;font-size:18px;display:flex;gap:12px;align-items:center;">
+            <span style="width:16px;height:16px;border:1px solid #999;border-radius:50%;display:inline-block;"></span>
+            看情况，两种都行
+        </div>
+    </div>
+</div>
 
-    ctx.fillStyle="#222";
-    ctx.font="bold 26px system-ui";
-    ctx.textAlign="center";
-    ctx.fillText("🐕 你的小狗人格", canvas.width/2, 50);
+<!-- ========== 第13题 ========== -->
+<div id="q13" class="question-page" style="display:none;text-align:center;padding:40px 24px;background:#f5f1ea;min-height:100vh;box-sizing:border-box;">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
+        <button onclick="prevQuestion()" style="background:none;border:none;font-size:22px;color:#333;">←</button>
+        <span style="font-size:18px;color:#666;">13 / 24</span>
+        <span style="font-size:16px;color:#888;">DogTi</span>
+    </div>
+    <div style="width:100%;height:4px;background:#ddd;border-radius:2px;margin-bottom:40px;">
+        <div style="width:calc(13/24*100%);height:4px;background:#444;border-radius:2px;"></div>
+    </div>
+    <div style="margin:0 auto 16px;max-width:220px;">
+        <img src="dog-question.jpg" alt="小狗" style="width:100%;"/>
+    </div>
+    <p style="font-size:15px;color:#555;margin:0 0 12px;">13 · 聚会</p>
+    <h2 style="font-size:32px;color:#222;margin:0 0 48px;line-height:1.4;">多人聚会结束后，你？</h2>
+    <div style="text-align:left;max-width:600px;margin:0 auto;">
+        <div class="option" onclick="selectOption(13,0)" style="border:1px solid #d9d4cb;border-radius:12px;padding:20px;margin-bottom:16px;cursor:pointer;font-size:18px;display:flex;gap:12px;align-items:center;">
+            <span style="width:16px;height:16px;border:1px solid #999;border-radius:50%;display:inline-block;"></span>
+            精力充沛，意犹未尽
+        </div>
+        <div class="option" onclick="selectOption(13,1)" style="border:1px solid #d9d4cb;border-radius:12px;padding:20px;margin-bottom:16px;cursor:pointer;font-size:18px;display:flex;gap:12px;align-items:center;">
+            <span style="width:16px;height:16px;border:1px solid #999;border-radius:50%;display:inline-block;"></span>
+            感觉疲惫，需要独处回血
+        </div>
+        <div class="option" onclick="selectOption(13,2)" style="border:1px solid #d9d4cb;border-radius:12px;padding:20px;margin-bottom:16px;cursor:pointer;font-size:18px;display:flex;gap:12px;align-items:center;">
+            <span style="width:16px;height:16px;border:1px solid #999;border-radius:50%;display:inline-block;"></span>
+            无感，和平常一样
+        </div>
+    </div>
+</div>
 
-    ctx.font="70px system-ui";
-    ctx.fillText(item.emoji, canvas.width/2, 125);
+<!-- ========== 第14题 ========== -->
+<div id="q14" class="question-page" style="display:none;text-align:center;padding:40px 24px;background:#f5f1ea;min-height:100vh;box-sizing:border-box;">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
+        <button onclick="prevQuestion()" style="background:none;border:none;font-size:22px;color:#333;">←</button>
+        <span style="font-size:18px;color:#666;">14 / 24</span>
+        <span style="font-size:16px;color:#888;">DogTi</span>
+    </div>
+    <div style="width:100%;height:4px;background:#ddd;border-radius:2px;margin-bottom:40px;">
+        <div style="width:calc(14/24*100%);height:4px;background:#444;border-radius:2px;"></div>
+    </div>
+    <div style="margin:0 auto 16px;max-width:220px;">
+        <img src="dog-question.jpg" alt="小狗" style="width:100%;"/>
+    </div>
+    <p style="font-size:15px;color:#555;margin:0 0 12px;">14 · 物品</p>
+    <h2 style="font-size:32px;color:#222;margin:0 0 48px;line-height:1.4;">你的桌面物品一般？</h2>
+    <div style="text-align:left;max-width:600px;margin:0 auto;">
+        <div class="option" onclick="selectOption(14,0)" style="border:1px solid #d9d4cb;border-radius:12px;padding:20px;margin-bottom:16px;cursor:pointer;font-size:18px;display:flex;gap:12px;align-items:center;">
+            <span style="width:16px;height:16px;border:1px solid #999;border-radius:50%;display:inline-block;"></span>
+            整齐有序，分类收纳
+        </div>
+        <div class="option" onclick="selectOption(14,1)" style="border:1px solid #d9d4cb;border-radius:12px;padding:20px;margin-bottom:16px;cursor:pointer;font-size:18px;display:flex;gap:12px;align-items:center;">
+            <span style="width:16px;height:16px;border:1px solid #999;border-radius:50%;display:inline-block;"></span>
+            随性摆放，乱但能找到
+        </div>
+        <div class="option" onclick="selectOption(14,2)" style="border:1px solid #d9d4cb;border-radius:12px;padding:20px;margin-bottom:16px;cursor:pointer;font-size:18px;display:flex;gap:12px;align-items:center;">
+            <span style="width:16px;height:16px;border:1px solid #999;border-radius:50%;display:inline-block;"></span>
+            偶尔整理，时乱时干净
+        </div>
+    </div>
+</div>
 
-    ctx.font="bold 22px system-ui";
-    ctx.fillText(item.name, canvas.width/2, 165);
+<!-- ========== 第15题 ========== -->
+<div id="q15" class="question-page" style="display:none;text-align:center;padding:40px 24px;background:#f5f1ea;min-height:100vh;box-sizing:border-box;">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
+        <button onclick="prevQuestion()" style="background:none;border:none;font-size:22px;color:#333;">←</button>
+        <span style="font-size:18px;color:#666;">15 / 24</span>
+        <span style="font-size:16px;color:#888;">DogTi</span>
+    </div>
+    <div style="width:100%;height:4px;background:#ddd;border-radius:2px;margin-bottom:40px;">
+        <div style="width:calc(15/24*100%);height:4px;background:#444;border-radius:2px;"></div>
+    </div>
+    <div style="margin:0 auto 16px;max-width:220px;">
+        <img src="dog-question.jpg" alt="小狗" style="width:100%;"/>
+    </div>
+    <p style="font-size:15px;color:#555;margin:0 0 12px;">15 · 灵感</p>
+    <h2 style="font-size:32px;color:#222;margin:0 0 48px;line-height:1.4;">想法灵感，通常来自？</h2>
+    <div style="text-align:left;max-width:600px;margin:0 auto;">
+        <div class="option" onclick="selectOption(15,0)" style="border:1px solid #d9d4cb;border-radius:12px;padding:20px;margin-bottom:16px;cursor:pointer;font-size:18px;display:flex;gap:12px;align-items:center;">
+            <span style="width:16px;height:16px;border:1px solid #999;border-radius:50%;display:inline-block;"></span>
+            生活观察与联想
+        </div>
+        <div class="option" onclick="selectOption(15,1)" style="border:1px solid #d9d4cb;border-radius:12px;padding:20px;margin-bottom:16px;cursor:pointer;font-size:18px;display:flex;gap:12px;align-items:center;">
+            <span style="width:16px;height:16px;border:1px solid #999;border-radius:50%;display:inline-block;"></span>
+            逻辑推导和资料
+        </div>
+        <div class="option" onclick="selectOption(15,2)" style="border:1px solid #d9d4cb;border-radius:12px;padding:20px;margin-bottom:16px;cursor:pointer;font-size:18px;display:flex;gap:12px;align-items:center;">
+            <span style="width:16px;height:16px;border:1px solid #999;border-radius:50%;display:inline-block;"></span>
+            和别人交流碰撞
+        </div>
+    </div>
+</div>
 
-    ctx.fillStyle="#666";
-    ctx.font="15px system-ui";
-    ctx.fillText(item.subtitle, canvas.width/2, 195);
+<!-- ========== 第16题 ========== -->
+<div id="q16" class="question-page" style="display:none;text-align:center;padding:40px 24px;background:#f5f1ea;min-height:100vh;box-sizing:border-box;">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
+        <button onclick="prevQuestion()" style="background:none;border:none;font-size:22px;color:#333;">←</button>
+        <span style="font-size:18px;color:#666;">16 / 24</span>
+        <span style="font-size:16px;color:#888;">DogTi</span>
+    </div>
+    <div style="width:100%;height:4px;background:#ddd;border-radius:2px;margin-bottom:40px;">
+        <div style="width:calc(16/24*100%);height:4px;background:#444;border-radius:2px;"></div>
+    </div>
+    <div style="margin:0 auto 16px;max-width:220px;">
+        <img src="dog-question.jpg" alt="小狗" style="width:100%;"/>
+    </div>
+    <p style="font-size:15px;color:#555;margin:0 0 12px;">16 · 难题</p>
+    <h2 style="font-size:32px;color:#222;margin:0 0 48px;line-height:1.4;">遇到难题，优先？</h2>
+    <div style="text-align:left;max-width:600px;margin:0 auto;">
+        <div class="option" onclick="selectOption(16,0)" style="border:1px solid #d9d4cb;border-radius:12px;padding:20px;margin-bottom:16px;cursor:pointer;font-size:18px;display:flex;gap:12px;align-items:center;">
+            <span style="width:16px;height:16px;border:1px solid #999;border-radius:50%;display:inline-block;"></span>
+            自己钻研，想办法搞定
+        </div>
+        <div class="option" onclick="selectOption(16,1)" style="border:1px solid #d9d4cb;border-radius:12px;padding:20px;margin-bottom:16px;cursor:pointer;font-size:18px;display:flex;gap:12px;align-items:center;">
+            <span style="width:16px;height:16px;border:1px solid #999;border-radius:50%;display:inline-block;"></span>
+            找朋友请教求助
+        </div>
+        <div class="option" onclick="selectOption(16,2)" style="border:1px solid #d9d4cb;border-radius:12px;padding:20px;margin-bottom:16px;cursor:pointer;font-size:18px;display:flex;gap:12px;align-items:center;">
+            <span style="width:16px;height:16px;border:1px solid #999;border-radius:50%;display:inline-block;"></span>
+            放一放，缓一缓再说
+        </div>
+    </div>
+</div>
 
-    ctx.fillStyle="#333";
-    ctx.textAlign="left";
-    ctx.font="14px system-ui";
-    let lineY = 230;
-    const lineHeight = 22;
-    const maxW = 320;
-    const words = item.desc;
-    let line = "";
-    for(let char of words){
-        if(ctx.measureText(line+char).width > maxW){
-            ctx.fillText(line,20,lineY);
-            lineY += lineHeight;
-            line = char;
-        }else{
-            line += char;
-        }
-    }
-    ctx.fillText(line,20,lineY);
-    lineY += 35;
+<!-- ========== 第17题 ========== -->
+<div id="q17" class="question-page" style="display:none;text-align:center;padding:40px 24px;background:#f5f1ea;min-height:100vh;box-sizing:border-box;">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
+        <button onclick="prevQuestion()" style="background:none;border:none;font-size:22px;color:#333;">←</button>
+        <span style="font-size:18px;color:#666;">17 / 24</span>
+        <span style="font-size:16px;color:#888;">DogTi</span>
+    </div>
+    <div style="width:100%;height:4px;background:#ddd;border-radius:2px;margin-bottom:40px;">
+        <div style="width:calc(17/24*100%);height:4px;background:#444;border-radius:2px;"></div>
+    </div>
+    <div style="margin:0 auto 16px;max-width:220px;">
+        <img src="dog-question.jpg" alt="小狗" style="width:100%;"/>
+    </div>
+    <p style="font-size:15px;color:#555;margin:0 0 12px;">17 · 社交</p>
+    <h2 style="font-size:32px;color:#222;margin:0 0 48px;line-height:1.4;">面对不熟的人，你？</h2>
+    <div style="text-align:left;max-width:600px;margin:0 auto;">
+        <div class="option" onclick="selectOption(17,0)" style="border:1px solid #d9d4cb;border-radius:12px;padding:20px;margin-bottom:16px;cursor:pointer;font-size:18px;display:flex;gap:12px;align-items:center;">
+            <span style="width:16px;height:16px;border:1px solid #999;border-radius:50%;display:inline-block;"></span>
+            主动开启话题聊天
+        </div>
+        <div class="option" onclick="selectOption(17,1)" style="border:1px solid #d9d4cb;border-radius:12px;padding:20px;margin-bottom:16px;cursor:pointer;font-size:18px;display:flex;gap:12px;align-items:center;">
+            <span style="width:16px;height:16px;border:1px solid #999;border-radius:50%;display:inline-block;"></span>
+            别人搭话才会回应
+        </div>
+        <div class="option" onclick="selectOption(17,2)" style="border:1px solid #d9d4cb;border-radius:12px;padding:20px;margin-bottom:16px;cursor:pointer;font-size:18px;display:flex;gap:12px;align-items:center;">
+            <span style="width:16px;height:16px;border:1px solid #999;border-radius:50%;display:inline-block;"></span>
+            尽量减少多余交流
+        </div>
+    </div>
+</div>
 
-    ctx.fillStyle="#777";
-    ctx.font="13px system-ui";
-    ctx.textAlign="center";
-    ctx.fillText("标签："+item.tags.join(" · "), canvas.width/2, lineY);
-    ctx.fillText("来自：测测你是什么小狗测试", canvas.width/2, 440);
-}
+<!-- ========== 第18题 ========== -->
+<div id="q18" class="question-page" style="display:none;text-align:center;padding:40px 24px;background:#f5f1ea;min-height:100vh;box-sizing:border-box;">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
+        <button onclick="prevQuestion()" style="background:none;border:none;font-size:22px;color:#333;">←</button>
+        <span style="font-size:18px;color:#666;">18 / 24</span>
+        <span style="font-size:16px;color:#888;">DogTi</span>
+    </div>
+    <div style="width:100%;height:4px;background:#ddd;border-radius:2px;margin-bottom:40px;">
+        <div style="width:calc(18/24*100%);height:4px;background:#444;border-radius:2px;"></div>
+    </div>
+    <div style="margin:0 auto 16px;max-width:220px;">
+        <img src="dog-question.jpg" alt="小狗" style="width:100%;"/>
+    </div>
+    <p style="font-size:15px;color:#555;margin:0 0 12px;">18 · 改变</p>
+    <h2 style="font-size:32px;color:#222;margin:0 0 48px;line-height:1.4;">生活突然发生变动，你？</h2>
+    <div style="text-align:left;max-width:600px;margin:0 auto;">
+        <div class="option" onclick="selectOption(18,0)" style="border:1px solid #d9d4cb;border-radius:12px;padding:20px;margin-bottom:16px;cursor:pointer;font-size:18px;display:flex;gap:12px;align-items:center;">
+            <span style="width:16px;height:16px;border:1px solid #999;border-radius:50%;display:inline-block;"></span>
+            感到兴奋，乐于尝试
+        </div>
+        <div class="option" onclick="selectOption(18,1)" style="border:1px solid #d9d4cb;border-radius:12px;padding:20px;margin-bottom:16px;cursor:pointer;font-size:18px;display:flex;gap:12px;align-items:center;">
+            <span style="width:16px;height:16px;border:1px solid #999;border-radius:50%;display:inline-block;"></span>
+            有点不安慢慢适应
+        </div>
+        <div class="option" onclick="selectOption(18,2)" style="border:1px solid #d9d4cb;border-radius:12px;padding:20px;margin-bottom:16px;cursor:pointer;font-size:18px;display:flex;gap:12px;align-items:center;">
+            <span style="width:16px;height:16px;border:1px solid #999;border-radius:50%;display:inline-block;"></span>
+            希望维持原来状态
+        </div>
+    </div>
+</div>
 
-function showResult(){
-    const type = getDogType();
-    const res = resultList.find(r => r.key === type) || resultList[0];
+<!-- ========== 第19题 ========== -->
+<div id="q19" class="question-page" style="display:none;text-align:center;padding:40px 24px;background:#f5f1ea;min-height:100vh;box-sizing:border-box;">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
+        <button onclick="prevQuestion()" style="background:none;border:none;font-size:22px;color:#333;">←</button>
+        <span style="font-size:18px;color:#666;">19 / 24</span>
+        <span style="font-size:16px;color:#888;">DogTi</span>
+    </div>
+    <div style="width:100%;height:4px;background:#ddd;border-radius:2px;margin-bottom:40px;">
+        <div style="width:calc(19/24*100%);height:4px;background:#444;border-radius:2px;"></div>
+    </div>
+    <div style="margin:0 auto 16px;max-width:220px;">
+        <img src="dog-question.jpg" alt="小狗" style="width:100%;"/>
+    </div>
+    <p style="font-size:15px;color:#555;margin:0 0 12px;">19 · 回忆</p>
+    <h2 style="font-size:32px;color:#222;margin:0 0 48px;line-height:1.4;">你更常回望过去还是畅想未来？</h2>
+    <div style="text-align:left;max-width:600px;margin:0 auto;">
+        <div class="option" onclick="selectOption(19,0)" style="border:1px solid #d9d4cb;border-radius:12px;padding:20px;margin-bottom:16px;cursor:pointer;font-size:18px;display:flex;gap:12px;align-items:center;">
+            <span style="width:16px;height:16px;border:1px solid #999;border-radius:50%;display:inline-block;"></span>
+            经常回想过往经历
+        </div>
+        <div class="option" onclick="selectOption(19,1)" style="border:1px solid #d9d4cb;border-radius:12px;padding:20px;margin-bottom:16px;cursor:pointer;font-size:18px;display:flex;gap:12px;align-items:center;">
+            <span style="width:16px;height:16px;border:1px solid #999;border-radius:50%;display:inline-block;"></span>
+            更多幻想未来生活
+        </div>
+        <div class="option" onclick="selectOption(19,2)" style="border:1px solid #d9d4cb;border-radius:12px;padding:20px;margin-bottom:16px;cursor:pointer;font-size:18px;display:flex;gap:12px;align-items:center;">
+            <span style="width:16px;height:16px;border:1px solid #999;border-radius:50%;display:inline-block;"></span>
+            专注活在当下此刻
+        </div>
+    </div>
+</div>
 
-    resEmoji.innerText = res.emoji;
-    resName.innerText = res.name;
-    resSub.innerText = res.subtitle;
-    resDesc.innerText = res.desc;
-    resTags.innerHTML = "";
+<!-- ========== 第20题 ========== -->
+<div id="q20" class="question-page" style="display:none;text-align:center;padding:40px 24px;background:#f5f1ea;min-height:100vh;box-sizing:border-box;">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
+        <button onclick="prevQuestion()" style="background:none;border:none;font-size:22px;color:#333;">←</button>
+        <span style="font-size:18px;color:#666;">20 / 24</span>
+        <span style="font-size:16px;color:#888;">DogTi</span>
+    </div>
+    <div style="width:100%;height:4px;background:#ddd;border-radius:2px;margin-bottom:40px;">
+        <div style="width:calc(20/24*100%);height:4px;background:#444;border-radius:2px;"></div>
+    </div>
+    <div style="margin:0 auto 16px;max-width:220px;">
+        <img src="dog-question.jpg" alt="小狗" style="width:100%;"/>
+    </div>
+    <p style="font-size:15px;color:#555;margin:0 0 12px;">20 · 情绪</p>
+    <h2 style="font-size:32px;color:#222;margin:0 0 48px;line-height:1.4;">看待一件事，你优先？</h2>
+    <div style="text-align:left;max-width:600px;margin:0 auto;">
+        <div class="option" onclick="selectOption(20,0)" style="border:1px solid #d9d4cb;border-radius:12px;padding:20px;margin-bottom:16px;cursor:pointer;font-size:18px;display:flex;gap:12px;align-items:center;">
+            <span style="width:16px;height:16px;border:1px solid #999;border-radius:50%;display:inline-block;"></span>
+            共情他人感受
+        </div>
+        <div class="option" onclick="selectOption(20,1)" style="border:1px solid #d9d4cb;border-radius:12px;padding:20px;margin-bottom:16px;cursor:pointer;font-size:18px;display:flex;gap:12px;align-items:center;">
+            <span style="width:16px;height:16px;border:1px solid #999;border-radius:50%;display:inline-block;"></span>
+            分析客观道理
+        </div>
+        <div class="option" onclick="selectOption(20,2)" style="border:1px solid #d9d4cb;border-radius:12px;padding:20px;margin-bottom:16px;cursor:pointer;font-size:18px;display:flex;gap:12px;align-items:center;">
+            <span style="width:16px;height:16px;border:1px solid #999;border-radius:50%;display:inline-block;"></span>
+            情理两者兼顾
+        </div>
+    </div>
+</div>
 
-    res.tags.forEach(t => {
-        const span = document.createElement("span");
-        span.className="tag";
-        span.innerText = t;
-        resTags.appendChild(span);
-    });
-    drawPoster(res);
-    showPage("result");
-}
-
-function resetQuiz(){
-    currentQ = 0;
-    score = {E:0,I:0,S:0,N:0,T:0,F:0,J:0,P:0};
-    showPage("quiz");
-    renderQuestion();
-}
-
-startBtn.onclick = resetQuiz;
-restartBtn.onclick = resetQuiz;
-
-// 保存图片
-saveImgBtn.onclick = ()=>{
-    const link = document.createElement("a");
-    link.download = "小狗人格海报.png";
-    link.href = canvas.toDataURL("image/png");
-    link.click();
-}
-
-shareBtn.onclick = () => {
-    navigator.clipboard.writeText(location.href).then(() => {
-        alert("链接复制成功，发给朋友一起测！");
-    });
-};
-
-showPage("start");
-</script>
-</body>
-</html>
+<!-- ========== 第21题 ========== -->
+<div id="q21" class="question-page"
