@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>测测你是什么小狗</title>
+    <title>测测你是什么小狗 🐕</title>
     <style>
         * {
             margin:0;
@@ -20,7 +20,7 @@
             max-width:600px;
             margin:0 auto;
         }
-        .active {
+        .page.active {
             display:block;
         }
         img {
@@ -55,6 +55,61 @@
         .progress{
             text-align:center;
             color:#777;
+            margin-bottom:10px;
+        }
+        /* 顶部小狗人格卡片 */
+        .result-card-top{
+            text-align:center;
+            padding:20px;
+        }
+        .result-card-top .avatar{
+            width:180px;
+            height:180px;
+            background:#eee;
+            border-radius:24px;
+            margin:0 auto 16px;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            font-size:80px;
+        }
+        .tags-wrap{
+            display:flex;
+            flex-wrap:wrap;
+            gap:10px;
+            justify-content:center;
+            margin:16px 0;
+        }
+        .tag{
+            background:#f3e7ec;
+            padding:8px 16px;
+            border-radius:99px;
+        }
+        /* 下方：维度分析卡片 */
+        .dimension-card{
+            background:#fff9f2;
+            border-radius:16px;
+            padding:20px;
+            margin-top:20px;
+        }
+        .dimension-item{
+            margin:12px 0;
+        }
+        .dimension-name{
+            display:flex;
+            justify-content:space-between;
+            margin-bottom:4px;
+        }
+        .bar-bg{
+            width:100%;
+            height:10px;
+            background:#e8e2dd;
+            border-radius:99px;
+            overflow:hidden;
+        }
+        .bar-fill{
+            height:100%;
+            background:#ff96aa;
         }
     </style>
 </head>
@@ -78,116 +133,180 @@
 
 <!--3.结果页面 -->
 <div id="result-page" class="page">
-    <h2 class="title">你的小狗人格</h2>
     <div id="result-content"></div>
     <button id="restartBtn">重新测试</button>
     <button id="shareBtn">复制分享链接</button>
     <button id="goEndBtn">查看结尾鸣谢页</button>
 </div>
 
-<!--4.结尾图片页 -->
+<!--4.结尾鸣谢页 -->
 <div id="end-page" class="page">
     <img src="end.jpg" alt="鸣谢页">
+    <div style="padding:16px;text-align:center;">
+        <h3>感谢参与本次小狗人格测试✨</h3>
+        <p style="margin:10px 0;line-height:1.6;">
+            本测试仅供娱乐，基于MBTI人格理论改编。<br>
+            无论是什么类型的小狗，都值得被好好爱护。
+        </p>
+        <p style="color:#777;font-size:14px;">
+            制作：兰希
+        </p>
+    </div>
     <button id="backToResultBtn">返回结果页</button>
 </div>
 
 <script>
-//=====【全局变量！！修复is not defined核心bug】=====
+//=====全局变量=====
 let startPage, quizPage, resultPage, endPage;
 let qText, optContainer, progressText;
 let score = {E:0,I:0,S:0,N:0,T:0,F:0,J:0,P:0};
 let currentQuestion = 0;
 
-//24道测试题目
+// 24题【每题固定4选项】
 const questions = [
 {"q":"聚会中你更倾向？","opts":[
-{"text":"主动活跃气氛，喜欢多人热闹",score:{E:1,I:0}},
-{"text":"安静旁观，更喜欢小圈子或独处",score:{E:0,I:1}}
+{"text":"主动活跃气氛，喜欢多人热闹",score:{E:2,I:0}},
+{"text":"轻松聊天，大小场合都适应",score:{E:1,I:1}},
+{"text":"安静旁观，偏爱小圈子",score:{E:0,I:2}},
+{"text":"尽量回避，独处最舒服",score:{E:0,I:3}}
 ]},
 {"q":"获取信息更喜欢？","opts":[
-{"text":"关注事实、细节、真实发生的事",score:{S:1,N:0}},
-{"text":"关注可能性、脑洞、背后的联想",score:{S:0,N:1}}
+{"text":"关注事实、细节、真实发生的事",score:{S:2,N:0}},
+{"text":"兼顾现实，偶尔联想脑洞",score:{S:1,N:1}},
+{"text":"关注可能性、背后的联想",score:{S:0,N:2}},
+{"text":"偏爱抽象脑洞，不纠结细节",score:{S:0,N:3}}
 ]},
 {"q":"做决定优先看？","opts":[
-{"text":"逻辑公平、道理对错",score:{T:1,F:0}},
-{"text":"人情感受、他人情绪",score:{T:0,F:1}}
+{"text":"逻辑公平、道理对错",score:{T:2,F:0}},
+{"text":"理性为主，兼顾他人感受",score:{T:1,F:1}},
+{"text":"人情感受、照顾他人情绪",score:{T:0,F:2}},
+{"text":"完全共情，优先保护情绪",score:{T:0,F:3}}
 ]},
 {"q":"生活习惯？","opts":[
-{"text":"提前规划，喜欢确定安排",score:{J:1,P:0}},
-{"text":"随性灵活，走一步看一步",score:{J:0,P:1}}
+{"text":"提前规划，喜欢确定安排",score:{J:2,P:0}},
+{"text":"有简单计划，可小幅变动",score:{J:1,P:1}},
+{"text":"随性灵活，走一步看一步",score:{J:0,P:2}},
+{"text":"讨厌计划，完全随缘",score:{J:0,P:3}}
 ]},
 {"q":"空闲时间？","opts":[
-{"text":"约朋友出门玩耍",score:{E:1,I:0}},
-{"text":"自己待着充电休息",score:{E:0,I:1}}
+{"text":"约朋友出门玩耍",score:{E:2,I:0}},
+{"text":"看情况，可社交可独处",score:{E:1,I:1}},
+{"text":"更愿意自己待着休息",score:{E:0,I:2}},
+{"text":"拒绝外出，独自充电",score:{E:0,I:3}}
 ]},
 {"q":"学习新知识？","opts":[
-{"text":"看实际案例、实操经验",score:{S:1,N:0}},
-{"text":"先理解底层原理概念",score:{S:0,N:1}}
+{"text":"看实际案例、实操经验",score:{S:2,N:0}},
+{"text":"实操为主，顺带了解原理",score:{S:1,N:1}},
+{"text":"先理解底层原理概念",score:{S:0,N:2}},
+{"text":"喜欢理论脑洞，不爱实操",score:{S:0,N:3}}
 ]},
 {"q":"吵架的时候？","opts":[
-{"text":"就事论事讲道理",score:{T:1,F:0}},
-{"text":"在意对方情绪感受",score:{T:0,F:1}}
+{"text":"就事论事讲道理",score:{T:2,F:0}},
+{"text":"讲道理同时顾及情绪",score:{T:1,F:1}},
+{"text":"在意对方情绪感受",score:{T:0,F:2}},
+{"text":"优先安抚情绪，搁置道理",score:{T:0,F:3}}
 ]},
 {"q":"任务截止前？","opts":[
-{"text":"尽早做完，安心收尾",score:{J:1,P:0}},
-{"text":"临近截止再冲刺",score:{J:0,P:1}}
+{"text":"尽早做完，安心收尾",score:{J:2,P:0}},
+{"text":"提前着手，留缓冲时间",score:{J:1,P:1}},
+{"text":"临近截止再冲刺",score:{J:0,P:2}},
+{"text":"经常拖到最后一刻",score:{J:0,P:3}}
 ]},
 {"q":"认识新朋友？","opts":[
-{"text":"主动搭话轻松熟悉",score:{E:1,I:0}},
-{"text":"等对方主动，慢热谨慎",score:{E:0,I:1}}
+{"text":"主动搭话轻松熟悉",score:{E:2,I:0}},
+{"text":"别人搭话，友好回应",score:{E:1,I:1}},
+{"text":"等对方主动，慢热谨慎",score:{E:0,I:2}},
+{"text":"抗拒陌生社交，保持距离",score:{E:0,I:3}}
 ]},
 {"q":"描述一件事，你习惯？","opts":[
-{"text":"直白写实，描述细节",score:{S:1,N:0}},
-{"text":"比喻联想，讲感受和脑洞",score:{S:0,N:1}}
+{"text":"直白写实，描述细节",score:{S:2,N:0}},
+{"text":"先说事实，少量联想",score:{S:1,N:1}},
+{"text":"比喻联想，讲感受和脑洞",score:{S:0,N:2}},
+{"text":"充满想象，忽略细节",score:{S:0,N:3}}
 ]},
 {"q":"评价一件事好坏？","opts":[
-{"text":"看是否合理高效",score:{T:1,F:0}},
-{"text":"看是否温暖贴心",score:{T:0,F:1}}
+{"text":"看是否合理高效",score:{T:2,F:0}},
+{"text":"效率优先，兼顾人情",score:{T:1,F:1}},
+{"text":"看是否温暖贴心",score:{T:0,F:2}},
+{"text":"好坏取决于情感体验",score:{T:0,F:3}}
 ]},
 {"q":"桌面与计划？","opts":[
-{"text":"整齐有序，清单安排",score:{J:1,P:0}},
-{"text":"随性摆放，临时安排",score:{J:0,P:1}}
+{"text":"整齐有序，清单安排",score:{J:2,P:0}},
+{"text":"大体整洁，有简易计划",score:{J:1,P:1}},
+{"text":"随性摆放，临时安排",score:{J:0,P:2}},
+{"text":"讨厌清单，杂乱无压力",score:{J:0,P:3}}
 ]},
 {"q":"疲惫的时候？","opts":[
-{"text":"找人聊天散心恢复能量",score:{E:1,I:0}},
-{"text":"独自安静休息恢复能量",score:{E:0,I:1}}
+{"text":"找人聊天散心恢复能量",score:{E:2,I:0}},
+{"text":"偶尔找人倾诉，也需要独处",score:{E:1,I:1}},
+{"text":"独自安静休息恢复能量",score:{E:0,I:2}},
+{"text":"必须独处，社交会耗尽精力",score:{E:0,I:3}}
 ]},
 {"q":"别人讲故事，你关注？","opts":[
-{"text":"真实发生的细节",score:{S:1,N:0}},
-{"text":"故事隐喻与想象空间",score:{S:0,N:1}}
+{"text":"真实发生的细节",score:{S:2,N:0}},
+{"text":"事实为主，顺带想象",score:{S:1,N:1}},
+{"text":"故事隐喻与想象空间",score:{S:0,N:2}},
+{"text":"喜欢隐喻，不在乎事实细节",score:{S:0,N:3}}
 ]},
 {"q":"被批评时第一反应？","opts":[
-{"text":"先判断逻辑对错",score:{T:1,F:0}},
-{"text":"先感受到难过委屈",score:{T:0,F:1}}
+{"text":"先判断逻辑对错",score:{T:2,F:0}},
+{"text":"先思考对错，再感受情绪",score:{T:1,F:1}},
+{"text":"先感受到难过委屈",score:{T:0,F:2}},
+{"text":"第一反应是情绪受伤",score:{T:0,F:3}}
 ]},
 {"q":"旅行安排？","opts":[
-{"text":"提前做好行程规划",score:{J:1,P:0}},
-{"text":"轻计划，随缘闲逛",score:{J:0,P:1}}
+{"text":"提前做好行程规划",score:{J:2,P:0}},
+{"text":"定核心行程，留自由时间",score:{J:1,P:1}},
+{"text":"轻计划，随缘闲逛",score:{J:0,P:2}},
+{"text":"完全不做计划，走到哪算哪",score:{J:0,P:3}}
 ]},
 {"q":"想法表达？","opts":[
-{"text":"想到就说，边说边想",score:{E:1,I:0}},
-{"text":"内心反复斟酌，想好再说",score:{E:0,I:1}}
+{"text":"想到就说，边说边想",score:{E:2,I:0}},
+{"text":"想到就表达，稍加思考",score:{E:1,I:1}},
+{"text":"内心反复斟酌，想好再说",score:{E:0,I:2}},
+{"text":"习惯藏心里，很少表达想法",score:{E:0,I:3}}
 ]},
 {"q":"看待想法？","opts":[
-{"text":"落地可行最重要",score:{S:1,N:0}},
-{"text":"创意新颖最重要",score:{S:0,N:1}}
+{"text":"落地可行最重要",score:{S:2,N:0}},
+{"text":"可行性优先，欣赏创意",score:{S:1,N:1}},
+{"text":"创意新颖最重要",score:{S:0,N:2}},
+{"text":"热爱脑洞，不在意能不能落地",score:{S:0,N:3}}
 ]},
 {"q":"团队矛盾你偏向？","opts":[
-{"text":"公平规则优先",score:{T:1,F:0}},
-{"text":"大家和谐优先",score:{T:0,F:1}}
+{"text":"公平规则优先",score:{T:2,F:0}},
+{"text":"规则优先，尽量调和气氛",score:{T:1,F:1}},
+{"text":"大家和谐优先",score:{T:0,F:2}},
+{"text":"优先维护所有人情绪感受",score:{T:0,F:3}}
 ]},
 {"q":"突发变动，你会？","opts":[
-{"text":"迅速重新制定计划",score:{J:1,P:0}},
-{"text":"顺势躺平，随机应变",score:{J:0,P:1}}
+{"text":"迅速重新制定计划",score:{J:2,P:0}},
+{"text":"快速调整，稳住大体安排",score:{J:1,P:1}},
+{"text":"顺势躺平，随机应变",score:{J:0,P:2}},
+{"text":"直接摆烂，完全跟着变化走",score:{J:0,P:3}}
 ]},
 {"q":"你更认可自己是？","opts":[
-{"text":"外向外放，越热闹越开心",score:{E:1,I:0}},
-{"text":"动静均衡，看人看场合",score:{E:0,I:0}},
-{"text":"内向内敛，社交消耗精力",score:{E:0,I:1}}
+{"text":"外向外放，越热闹越开心",score:{E:2,I:0}},
+{"text":"动静均衡，看人看场合",score:{E:1,I:1}},
+{"text":"内向内敛，社交消耗精力",score:{E:0,I:2}},
+{"text":"极度内向，需要大量独处",score:{E:0,I:3}}
 ]},
-{"q":"你更偏爱？","opts":[
-{"text":"优先理性，守护对方情绪",score:{T:1,F:0}},
-{"text":"偏爱独处，享受安静时光",score:{T:0,F:1}}
+{"q":"遇到难题，你习惯？","opts":[
+{"text":"和别人讨论，碰撞思路",score:{E:2,I:0}},
+{"text":"可以讨论，也能独立思考",score:{E:1,I:1}},
+{"text":"自己安静琢磨解决方案",score:{E:0,I:2}},
+{"text":"拒绝讨论，独自思考很久",score:{E:0,I:3}}
+]},
+{"q":"评价作品，你看重？","opts":[
+{"text":"做工、细节、真实质感",score:{S:2,N:0}},
+{"text":"质感优先，感受其次",score:{S:1,N:1}},
+{"text":"寓意、氛围感、想象力",score:{S:0,N:2}},
+{"text":"只在意感受，忽略细节做工",score:{S:0,N:3}}
+]},
+{"q":"做选择时，你更看重？","opts":[
+{"text":"客观利弊、收益得失",score:{T:2,F:0}},
+{"text":"利弊为主，兼顾人情",score:{T:1,F:1}},
+{"text":"个人感受、他人情绪",score:{T:0,F:2}},
+{"text":"遵从内心感受，不在乎利弊",score:{T:0,F:3}}
 ]}
 ];
 
@@ -195,131 +314,131 @@ const questions = [
 const dogTypeList = [
   {
     code:"INTJ",
-    name:"策略大脑犬",
-    sub:"腹黑军师小狗",
+    name:"策略牧羊犬",
+    sub:"远见规划者",
     emoji:"🐺",
-    desc:`心思缜密，擅长布局，遇事冷静理智，外表冷淡内心专一，只对极少数人敞开心扉。做事长远规划，从不冲动行事。`,
-    tags:["理智","独立","腹黑","专一"]
+    desc:`目标感强，擅长长远布局，冷静独立，内心有完整世界。习惯提前规划一切，不喜无意义社交，认定的事会坚持到底。`,
+    tags:["远见","独立","冷静","规划"]
   },
   {
     code:"INTP",
-    name:"哲学思考犬",
-    sub:"脑洞理论家小狗",
-    emoji:"🦉",
-    desc:`好奇心爆棚，沉迷思考各种奇奇怪怪的问题，随性自由，讨厌条条框框，看起来散漫，实则智商在线。`,
-    tags:["清醒","佛系","爱思考","自由"]
+    name:"佛系雪纳瑞",
+    sub:"好奇思考者",
+    emoji:"🐶",
+    desc:`喜欢沉浸在思考、逻辑和猜想里，内心世界浩瀚。随性松弛，对人情应酬无感，经常走神放空，执行力偏弱。`,
+    tags:["爱思考","松弛佛系","脑洞深邃","不爱应酬"]
   },
   {
     code:"ENTJ",
-    name:"霸气总裁犬",
-    sub:"领头掌权小狗",
-    emoji:"🐕",
-    desc:`天生领导者，做事果断有条理，目标感极强，敢做决定，既有掌控力又懂得照顾身边人，气场十足。`,
-    tags:["果断","强势","靠谱","自信"]
+    name:"霸气德牧",
+    sub:"天生指挥官",
+    emoji:"🐕‍🦺",
+    desc:`自信果断，领导力强，做事干脆利落，目标导向。善于统筹安排，乐于带领大家推进事情，偶尔强势直接。`,
+    tags:["果断","领导力","目标感","直率"]
   },
   {
     code:"ENTP",
-    name:"点子王犬",
-    sub:"辩论皮小狗",
-    emoji:"🦊",
-    desc:`头脑灵活，满嘴奇思妙想，喜欢抬杠开玩笑，永远不会无聊，社交能力拉满，走到哪里都是气氛担当。`,
-    tags:["活泼","善辩","爱玩","有趣"]
+    name:"调皮边牧",
+    sub:"脑洞辩论家",
+    emoji:"🐾",
+    desc:`头脑灵活，脑洞源源不断，喜欢新鲜事物，热爱思辨。讨厌枯燥重复，善于活跃气氛，想法跳脱多变。`,
+    tags:["脑洞大","活泼善辩","好奇心强","讨厌死板"]
   },
   {
     code:"INFJ",
-    name:"灵魂治愈犬",
-    sub:"温柔知心小狗",
-    emoji:"🕊️",
-    desc:`洞察力极强，能看穿别人的情绪，待人温柔细腻，慢慢袒露长度，外表安静，内心丰富又敏感。`,
-    tags:["温柔","细腻","浪漫","忠诚"]
+    name:"温柔金毛",
+    sub:"洞察守护者",
+    emoji:"🐩",
+    desc:`共情细腻，善于读懂别人内心，温柔且有主见。内心有坚定价值观，默默守护在意的人，外表安静内心丰盈。`,
+    tags:["共情强","洞察力","温柔","坚守本心"]
   },
   {
     code:"INFP",
-    name:"梦想家小狗",
-    sub:"心软文艺小狗",
+    name:"软萌比熊",
+    sub:"理想治愈者",
     emoji:"🐇",
-    desc:`内心柔软善良，共情力满，忠于自己的本心，向往纯粹的感情，容易内耗，但是对待真心的人无比忠诚。`,
-    tags:["温柔","文艺","敏感","忠诚"]
+    desc:`内心柔软浪漫，忠于自己的理想，共情力极强。敏感细腻，热爱幻想，重视真诚，很需要独处充电。`,
+    tags:["浪漫理想","柔软敏感","真诚治愈","爱独处"]
   },
   {
     code:"ENFJ",
-    name:"领队救赎犬",
-    sub:"暖心队长小狗",
-    emoji:"🐻",
-    desc:`热心又体贴，很会照顾朋友的情绪，擅长带动氛围，乐于成全别人，是大家公认的暖心依靠。`,
-    tags:["热心","社交","体贴","暖心"]
+    name:"暖心拉布拉多",
+    sub:"热忱引导者",
+    emoji:"🐶",
+    desc:`热情温暖，善于鼓舞他人，乐于倾听陪伴。能感知身边人的情绪，愿意帮助别人成长，人缘很好。`,
+    tags:["温暖热忱","善倾听","鼓舞他人","体贴"]
   },
   {
     code:"ENFP",
-    name:"冒险交友犬",
-    sub:"快乐社交小狗",
-    emoji:"🦋",
-    desc:`永远充满活力，热爱新鲜事物，人缘极好，活泼开朗，永远保有童心，走到哪里都能收获好感。`,
-    tags:["活泼","乐天","人缘好"]
+    name:"快乐柯基",
+    sub:"元气追梦人",
+    emoji:"🐕",
+    desc:`元气满满，热爱生活，想象力丰富，永远对新鲜事物充满热情。自由随性，讨厌束缚，感染力强。`,
+    tags:["元气活泼","热爱自由","想象力强","感染力强"]
   },
   {
     code:"ISTJ",
-    name:"老干部护卫犬",
-    sub:"守规矩忠诚小狗",
-    emoji:"🐢",
-    desc:`踏实稳重，恪守规矩，做事一丝不苟，责任心极强，一旦认定主人就一辈子守在身边，靠谱又安心。`,
-    tags:["踏实","严谨","忠诚","靠谱"]
+    name:"老实柴犬",
+    sub:"踏实守护者",
+    emoji:"🦮",
+    desc:`稳重靠谱，遵守规则，做事细心负责，重视承诺。做事一步一步来，细心严谨，值得信赖。`,
+    tags:["踏实靠谱","细心严谨","守诺","稳重"]
   },
   {
     code:"ISFJ",
-    name:"棉花糖小狗",
-    sub:"贴心保姆小狗",
-    emoji:"🐹",
-    desc:`细心体贴，默默照顾身边人的生活，包容度极高，习惯委屈自己成全他人，温柔又有耐心。`,
-    tags:["细心","严谨","体贴","忠诚"]
+    name:"贴心博美",
+    sub:"温柔照顾者",
+    emoji:"🐶",
+    desc:`细心体贴，擅长留意身边人的需求，默默付出。温和耐心，重视身边人，习惯照顾别人感受。`,
+    tags:["体贴细心","默默付出","温和耐心","顾家"]
   },
   {
     code:"ESTJ",
-    name:"纪律委员犬",
-    sub:"严格管家小狗",
-    emoji:"🐂",
-    desc:`讲究秩序与规则，做事干脆利落，执行力强，习惯把一切安排妥当。有责任心，很有主人意识。`,
-    tags:["严谨","执行力强","务实","有担当"]
+    name:"干练罗威纳",
+    sub:"务实管理者",
+    emoji:"🐕",
+    desc:`务实干练，有条理，重视秩序，执行力很强。做事干脆，擅长组织安排，看重效率与责任。`,
+    tags:["务实干练","执行力强","有条理","负责任"]
   },
   {
     code:"ESFJ",
-    name:"全场暖心犬",
-    sub:"热情好客小狗",
-    emoji:"🐑",
-    desc:`待人热情友善，擅长维系人际关系，照顾所有人的情绪，人缘极佳，热情又温暖。`,
-    tags:["热情","合群","体贴","外向"]
+    name:"热情萨摩耶",
+    sub:"热心东道主",
+    emoji:"🐩",
+    desc:`热情友善，擅长照顾所有人感受，喜欢热闹。乐于维系人际关系，很在意身边人的情绪与氛围。`,
+    tags:["热情友善","擅长社交","照顾情绪","爱热闹"]
   },
   {
     code:"ISTP",
-    name:"独行探险家",
-    sub:"冷静手艺人小狗",
-    emoji:"🦎",
-    desc:`动手能力超强，遇事冷静沉着，不爱废话，喜欢独自探索新鲜事物，不爱被管束，自由又独立。`,
-    tags:["冷静","动手强","独立","随性"]
+    name:"酷帅杰克罗素",
+    sub:"实操探险家",
+    emoji:"🐕",
+    desc:`冷静务实，动手能力强，擅长解决实际问题。不爱空话，喜欢实操，遇事冷静随机应变。`,
+    tags:["动手强","冷静务实","随机应变","不爱空谈"]
   },
   {
     code:"ISFP",
-    name:"艺术小猎犬",
-    sub:"随性艺术家小狗",
-    emoji:"🐱",
-    desc:`热爱自由，审美在线，活在当下，讨厌被计划束缚，性格佛系，只追随自己内心的感受。`,
-    tags:["安静","随性","感性","自由"]
+    name:"慵懒法斗",
+    sub:"感官艺术家",
+    emoji:"🐶",
+    desc:`热爱生活，审美在线，活在当下，不喜约束。感受细腻，偏爱简单松弛的生活，不爱宏大规划。`,
+    tags:["审美在线","松弛随性","活在当下","不喜束缚"]
   },
   {
     code:"ESTP",
-    name:"活力对冲犬",
-    sub:"冒险行动派小狗",
-    emoji:"🐍",
-    desc:`精力旺盛，敢于闯荡，擅长临场应变，社交游刃有余，喜欢刺激好玩的新鲜事。`,
-    tags:["果敢","外向","胆大"]
+    name:"活力杜宾",
+    sub:"现实冒险家",
+    emoji:"🐕",
+    desc:`精力充沛，行动力强，擅长临场应变，喜欢刺激新鲜体验。现实主义，敢于尝试，直率敢冲。`,
+    tags:["行动力强","临场应变","敢尝试","精力旺盛"]
   },
   {
     code:"ESFP",
-    name:"快乐小丑犬",
-    sub:"开心乐天小狗",
+    name:"欢乐泰迪",
+    sub:"快乐表演者",
     emoji:"🐶",
-    desc:`活在当下，乐观开朗，享受当下的快乐，热爱热闹，擅长活跃气氛，永远无忧无虑。`,
-    tags:["乐天","热闹","享受生活","外向"]
+    desc:`活泼热闹，享受当下，感染力强，喜欢分享快乐。热爱生活，擅长带动气氛，讨厌枯燥压抑。`,
+    tags:["活泼热闹","享受当下","感染力强","乐天"]
   }
 ];
 
@@ -397,11 +516,11 @@ function renderQuestion(){
     })
 }
 
-//计算结果并展示
+//计算结果并展示：【顶部小狗卡片 + 下方维度分析卡片】
 function showResult(){
     hideAllPage();
     resultPage.style.display = "block";
-    //计算四个维度
+    //四个维度分数
     const e = score.E, i = score.I;
     const s = score.S, n = score.N;
     const t = score.T, f = score.F;
@@ -412,21 +531,79 @@ function showResult(){
     type += t>=f ? "T":"F";
     type += j>=p ? "J":"P";
 
-    //匹配小狗信息
     const myDog = dogTypeList.find(item=>item.code === type);
     let html = "";
+    // 1. 顶部小狗人格卡片
     if(myDog){
-        html += `<div style="text-align:center">
-        <div style="font-size:48px;">${myDog.emoji}</div>
-        <h3>${myDog.name}</h3>
-        <p>${myDog.sub}</p>
-        <p style="margin:10px 0;">${myDog.desc}</p>
-        <p>标签：${myDog.tags.join("、")}</p>
-        <p>你的类型：${type}</p>
+        html += `<div class="result-card-top">
+        <div class="avatar">${myDog.emoji}</div>
+        <h2>${myDog.name}</h2>
+        <p style="color:#666;font-size:18px;">${myDog.sub}</p>
+        <p style="line-height:1.7;margin-top:12px;">${myDog.desc}</p>
+        <div class="tags-wrap">
+            ${myDog.tags.map(tag=>`<span class="tag">${tag}</span>`).join("")}
+        </div>
         </div>`;
-    }else{
-        html = `<p>匹配成功，类型：${type}</p>`;
     }
+
+    // 2. 第二张卡片：维度分析（不再重复人格）
+    const totalE_I = e + i;
+    const totalS_N = s + n;
+    const totalT_F = t + f;
+    const totalJ_P = j + p;
+    html += `<div class="dimension-card">
+    <h3 style="text-align:center;margin-bottom:16px;">性格维度分析</h3>
+    <div class="dimension-item">
+        <div class="dimension-name">
+            <span>E外向</span>
+            <span>I内向</span>
+        </div>
+        <div class="bar-bg">
+            <div class="bar-fill" style="width:${totalE_I? (e/totalE_I*100):50}%"></div>
+        </div>
+        <div style="display:flex;justify-content:space-between;font-size:13px;color:#666;margin-top:4px;">
+            <span>${e}分</span><span>${i}分</span>
+        </div>
+    </div>
+    <div class="dimension-item">
+        <div class="dimension-name">
+            <span>S实感</span>
+            <span>N直觉</span>
+        </div>
+        <div class="bar-bg">
+            <div class="bar-fill" style="width:${totalS_N? (s/totalS_N*100):50}%"></div>
+        </div>
+        <div style="display:flex;justify-content:space-between;font-size:13px;color:#666;margin-top:4px;">
+            <span>${s}分</span><span>${n}分</span>
+        </div>
+    </div>
+    <div class="dimension-item">
+        <div class="dimension-name">
+            <span>T思考</span>
+            <span>F情感</span>
+        </div>
+        <div class="bar-bg">
+            <div class="bar-fill" style="width:${totalT_F? (t/totalT_F*100):50}%"></div>
+        </div>
+        <div style="display:flex;justify-content:space-between;font-size:13px;color:#666;margin-top:4px;">
+            <span>${t}分</span><span>${f}分</span>
+        </div>
+    </div>
+    <div class="dimension-item">
+        <div class="dimension-name">
+            <span>J判断</span>
+            <span>P感知</span>
+        </div>
+        <div class="bar-bg">
+            <div class="bar-fill" style="width:${totalJ_P? (j/totalJ_P*100):50}%"></div>
+        </div>
+        <div style="display:flex;justify-content:space-between;font-size:13px;color:#666;margin-top:4px;">
+            <span>${j}分</span><span>${p}分</span>
+        </div>
+    </div>
+    <p style="text-align:center;margin-top:12px;color:#666">你的人格代码：${type}</p>
+    </div>`;
+
     document.getElementById("result-content").innerHTML = html;
 }
 </script>
