@@ -15,29 +15,23 @@ body{font-family:system-ui,-apple-system,sans-serif;background:#f5f1ea;color:#22
 </head>
 <body>
 
-<!-- ========== 【你的封面开始页 直接沿用】 ========== -->
+<!-- ========== 开始封面（你的原版完整保留） ========== -->
 <div id="start-page" style="text-align:center;padding:56px 28px 40px;background:#f5f1ea;min-height:100vh;">
-    <!-- 顶部小标题 -->
     <div style="font-size:13px;color:#666;letter-spacing:2px;margin-bottom:18px;">
         测测你是什么小狗
     </div>
-    <!-- 封面小狗图 -->
     <div style="margin:0 auto 24px;max-width:360px;border-radius:18px;overflow:hidden;box-shadow:0 10px 30px rgba(0,0,0,0.12);">
         <img src="dog-cover.jpg" alt="小狗封面" style="width:100%;display:block;" />
     </div>
-    <!-- 主标题 -->
     <h1 style="font-size:34px;font-weight:800;color:#222;margin-bottom:10px;letter-spacing:1px;">
         dogti
     </h1>
-    <!-- 副标题 -->
     <p style="font-size:16px;color:#444;margin-bottom:32px;">
         测测你是什么小狗 (´・ω・｀)
     </p>
-    <!-- 开始按钮 -->
     <button class="btn" id="startBtn" style="background:#222;color:#fff;border:none;border-radius:999px;padding:14px 48px;font-size:16px;cursor:pointer;letter-spacing:2px;">
         开始测试
     </button>
-    <!-- 说明文字 -->
     <div style="margin-top:18px;font-size:12px;color:#888;line-height:1.6;">
         24题 测出你的小狗人格<br/>
         已有 00,000 人测试
@@ -45,7 +39,7 @@ body{font-family:system-ui,-apple-system,sans-serif;background:#f5f1ea;color:#22
 </div>
 
 
-<!-- ========== 第1题 ========== -->
+<!-- ========== Q1 ========== -->
 <div id="q1" class="question-page" style="display:none;text-align:center;padding:40px 24px;background:#f5f1ea;min-height:100vh;box-sizing:border-box;">
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
         <button onclick="prevQuestion()" style="background:none;border:none;font-size:22px;color:#333;">←</button>
@@ -76,7 +70,7 @@ body{font-family:system-ui,-apple-system,sans-serif;background:#f5f1ea;color:#22
     </div>
 </div>
 
-<!-- ========== 第2题 ========== -->
+<!-- ========== Q2 ========== -->
 <div id="q2" class="question-page" style="display:none;text-align:center;padding:40px 24px;background:#f5f1ea;min-height:100vh;box-sizing:border-box;">
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
         <button onclick="prevQuestion()" style="background:none;border:none;font-size:22px;color:#333;">←</button>
@@ -107,7 +101,7 @@ body{font-family:system-ui,-apple-system,sans-serif;background:#f5f1ea;color:#22
     </div>
 </div>
 
-<!-- ========== 第3题 ========== -->
+<!-- ========== Q3 ========== -->
 <div id="q3" class="question-page" style="display:none;text-align:center;padding:40px 24px;background:#f5f1ea;min-height:100vh;box-sizing:border-box;">
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
         <button onclick="prevQuestion()" style="background:none;border:none;font-size:22px;color:#333;">←</button>
@@ -138,7 +132,7 @@ body{font-family:system-ui,-apple-system,sans-serif;background:#f5f1ea;color:#22
     </div>
 </div>
 
-<!-- ========== 第4题 ========== -->
+<!-- ========== Q4 ========== -->
 <div id="q4" class="question-page" style="display:none;text-align:center;padding:40px 24px;background:#f5f1ea;min-height:100vh;box-sizing:border-box;">
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
         <button onclick="prevQuestion()" style="background:none;border:none;font-size:22px;color:#333;">←</button>
@@ -169,7 +163,7 @@ body{font-family:system-ui,-apple-system,sans-serif;background:#f5f1ea;color:#22
     </div>
 </div>
 
-<!-- ========== 第5题 ========== -->
+<!-- ========== Q5 ========== -->
 <div id="q5" class="question-page" style="display:none;text-align:center;padding:40px 24px;background:#f5f1ea;min-height:100vh;box-sizing:border-box;">
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
         <button onclick="prevQuestion()" style="background:none;border:none;font-size:22px;color:#333;">←</button>
@@ -200,7 +194,7 @@ body{font-family:system-ui,-apple-system,sans-serif;background:#f5f1ea;color:#22
     </div>
 </div>
 
-<!-- ========== 第6题 ========== -->
+<!-- ========== Q6 ========== -->
 <div id="q6" class="question-page" style="display:none;text-align:center;padding:40px 24px;background:#f5f1ea;min-height:100vh;box-sizing:border-box;">
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
         <button onclick="prevQuestion()" style="background:none;border:none;font-size:22px;color:#333;">←</button>
@@ -231,7 +225,7 @@ body{font-family:system-ui,-apple-system,sans-serif;background:#f5f1ea;color:#22
     </div>
 </div>
 
-<!-- ========== 第7题 ========== -->
+<!-- ========== Q7 ========== -->
 <div id="q7" class="question-page" style="display:none;text-align:center;padding:40px 24px;background:#f5f1ea;min-height:100vh;box-sizing:border-box;">
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
         <button onclick="prevQuestion()" style="background:none;border:none;font-size:22px;color:#333;">←</button>
@@ -262,7 +256,7 @@ body{font-family:system-ui,-apple-system,sans-serif;background:#f5f1ea;color:#22
     </div>
 </div>
 
-<!-- ========== 第8题 ========== -->
+<!-- ========== Q8 ========== -->
 <div id="q8" class="question-page" style="display:none;text-align:center;padding:40px 24px;background:#f5f1ea;min-height:100vh;box-sizing:border-box;">
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
         <button onclick="prevQuestion()" style="background:none;border:none;font-size:22px;color:#333;">←</button>
@@ -293,7 +287,7 @@ body{font-family:system-ui,-apple-system,sans-serif;background:#f5f1ea;color:#22
     </div>
 </div>
 
-<!-- ========== 第9题 ========== -->
+<!-- ========== Q9 ========== -->
 <div id="q9" class="question-page" style="display:none;text-align:center;padding:40px 24px;background:#f5f1ea;min-height:100vh;box-sizing:border-box;">
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
         <button onclick="prevQuestion()" style="background:none;border:none;font-size:22px;color:#333;">←</button>
@@ -324,7 +318,7 @@ body{font-family:system-ui,-apple-system,sans-serif;background:#f5f1ea;color:#22
     </div>
 </div>
 
-<!-- ========== 第10题 ========== -->
+<!-- ========== Q10 ========== -->
 <div id="q10" class="question-page" style="display:none;text-align:center;padding:40px 24px;background:#f5f1ea;min-height:100vh;box-sizing:border-box;">
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
         <button onclick="prevQuestion()" style="background:none;border:none;font-size:22px;color:#333;">←</button>
@@ -355,7 +349,7 @@ body{font-family:system-ui,-apple-system,sans-serif;background:#f5f1ea;color:#22
     </div>
 </div>
 
-<!-- ========== 第11题 ========== -->
+<!-- ========== Q11 ========== -->
 <div id="q11" class="question-page" style="display:none;text-align:center;padding:40px 24px;background:#f5f1ea;min-height:100vh;box-sizing:border-box;">
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
         <button onclick="prevQuestion()" style="background:none;border:none;font-size:22px;color:#333;">←</button>
@@ -386,7 +380,7 @@ body{font-family:system-ui,-apple-system,sans-serif;background:#f5f1ea;color:#22
     </div>
 </div>
 
-<!-- ========== 第12题 ========== -->
+<!-- ========== Q12 ========== -->
 <div id="q12" class="question-page" style="display:none;text-align:center;padding:40px 24px;background:#f5f1ea;min-height:100vh;box-sizing:border-box;">
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
         <button onclick="prevQuestion()" style="background:none;border:none;font-size:22px;color:#333;">←</button>
@@ -417,7 +411,7 @@ body{font-family:system-ui,-apple-system,sans-serif;background:#f5f1ea;color:#22
     </div>
 </div>
 
-<!-- ========== 第13题 ========== -->
+<!-- ========== Q13 ========== -->
 <div id="q13" class="question-page" style="display:none;text-align:center;padding:40px 24px;background:#f5f1ea;min-height:100vh;box-sizing:border-box;">
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
         <button onclick="prevQuestion()" style="background:none;border:none;font-size:22px;color:#333;">←</button>
@@ -448,7 +442,7 @@ body{font-family:system-ui,-apple-system,sans-serif;background:#f5f1ea;color:#22
     </div>
 </div>
 
-<!-- ========== 第14题 ========== -->
+<!-- ========== Q14 ========== -->
 <div id="q14" class="question-page" style="display:none;text-align:center;padding:40px 24px;background:#f5f1ea;min-height:100vh;box-sizing:border-box;">
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
         <button onclick="prevQuestion()" style="background:none;border:none;font-size:22px;color:#333;">←</button>
@@ -479,7 +473,7 @@ body{font-family:system-ui,-apple-system,sans-serif;background:#f5f1ea;color:#22
     </div>
 </div>
 
-<!-- ========== 第15题 ========== -->
+<!-- ========== Q15 ========== -->
 <div id="q15" class="question-page" style="display:none;text-align:center;padding:40px 24px;background:#f5f1ea;min-height:100vh;box-sizing:border-box;">
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
         <button onclick="prevQuestion()" style="background:none;border:none;font-size:22px;color:#333;">←</button>
@@ -510,7 +504,7 @@ body{font-family:system-ui,-apple-system,sans-serif;background:#f5f1ea;color:#22
     </div>
 </div>
 
-<!-- ========== 第16题 ========== -->
+<!-- ========== Q16 ========== -->
 <div id="q16" class="question-page" style="display:none;text-align:center;padding:40px 24px;background:#f5f1ea;min-height:100vh;box-sizing:border-box;">
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
         <button onclick="prevQuestion()" style="background:none;border:none;font-size:22px;color:#333;">←</button>
@@ -541,7 +535,7 @@ body{font-family:system-ui,-apple-system,sans-serif;background:#f5f1ea;color:#22
     </div>
 </div>
 
-<!-- ========== 第17题 ========== -->
+<!-- ========== Q17 ========== -->
 <div id="q17" class="question-page" style="display:none;text-align:center;padding:40px 24px;background:#f5f1ea;min-height:100vh;box-sizing:border-box;">
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
         <button onclick="prevQuestion()" style="background:none;border:none;font-size:22px;color:#333;">←</button>
@@ -572,7 +566,7 @@ body{font-family:system-ui,-apple-system,sans-serif;background:#f5f1ea;color:#22
     </div>
 </div>
 
-<!-- ========== 第18题 ========== -->
+<!-- ========== Q18 ========== -->
 <div id="q18" class="question-page" style="display:none;text-align:center;padding:40px 24px;background:#f5f1ea;min-height:100vh;box-sizing:border-box;">
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
         <button onclick="prevQuestion()" style="background:none;border:none;font-size:22px;color:#333;">←</button>
@@ -603,7 +597,7 @@ body{font-family:system-ui,-apple-system,sans-serif;background:#f5f1ea;color:#22
     </div>
 </div>
 
-<!-- ========== 第19题 ========== -->
+<!-- ========== Q19 ========== -->
 <div id="q19" class="question-page" style="display:none;text-align:center;padding:40px 24px;background:#f5f1ea;min-height:100vh;box-sizing:border-box;">
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
         <button onclick="prevQuestion()" style="background:none;border:none;font-size:22px;color:#333;">←</button>
@@ -634,7 +628,7 @@ body{font-family:system-ui,-apple-system,sans-serif;background:#f5f1ea;color:#22
     </div>
 </div>
 
-<!-- ========== 第20题 ========== -->
+<!-- ========== Q20 ========== -->
 <div id="q20" class="question-page" style="display:none;text-align:center;padding:40px 24px;background:#f5f1ea;min-height:100vh;box-sizing:border-box;">
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
         <button onclick="prevQuestion()" style="background:none;border:none;font-size:22px;color:#333;">←</button>
@@ -665,5 +659,202 @@ body{font-family:system-ui,-apple-system,sans-serif;background:#f5f1ea;color:#22
     </div>
 </div>
 
-<!-- ========== 第21题 ========== -->
-<div id="q21" class="question-page"
+<!-- ========== Q21 ========== -->
+<div id="q21" class="question-page" style="display:none;text-align:center;padding:40px 24px;background:#f5f1ea;min-height:100vh;box-sizing:border-box;">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
+        <button onclick="prevQuestion()" style="background:none;border:none;font-size:22px;color:#333;">←</button>
+        <span style="font-size:18px;color:#666;">21 / 24</span>
+        <span style="font-size:16px;color:#888;">DogTi</span>
+    </div>
+    <div style="width:100%;height:4px;background:#ddd;border-radius:2px;margin-bottom:40px;">
+        <div style="width:calc(21/24*100%);height:4px;background:#444;border-radius:2px;"></div>
+    </div>
+    <div style="margin:0 auto 16px;max-width:220px;">
+        <img src="dog-question.jpg" alt="小狗" style="width:100%;"/>
+    </div>
+    <p style="font-size:15px;color:#555;margin:0 0 12px;">21 · 爱好</p>
+    <h2 style="font-size:32px;color:#222;margin:0 0 48px;line-height:1.4;">空闲爱好更偏向？</h2>
+    <div style="text-align:left;max-width:600px;margin:0 auto;">
+        <div class="option" onclick="selectOption(21,0)" style="border:1px solid #d9d4cb;border-radius:12px;padding:20px;margin-bottom:16px;cursor:pointer;font-size:18px;display:flex;gap:12px;align-items:center;">
+            <span style="width:16px;height:16px;border:1px solid #999;border-radius:50%;display:inline-block;"></span>
+            动手创作（画画手工等）
+        </div>
+        <div class="option" onclick="selectOption(21,1)" style="border:1px solid #d9d4cb;border-radius:12px;padding:20px;margin-bottom:16px;cursor:pointer;font-size:18px;display:flex;gap:12px;align-items:center;">
+            <span style="width:16px;height:16px;border:1px solid #999;border-radius:50%;display:inline-block;"></span>
+            休闲娱乐（追剧打游戏）
+        </div>
+        <div class="option" onclick="selectOption(21,2)" style="border:1px solid #d9d4cb;border-radius:12px;padding:20px;margin-bottom:16px;cursor:pointer;font-size:18px;display:flex;gap:12px;align-items:center;">
+            <span style="width:16px;height:16px;border:1px solid #999;border-radius:50%;display:inline-block;"></span>
+            外出运动到处逛
+        </div>
+    </div>
+</div>
+
+<!-- ========== Q22 ========== -->
+<div id="q22" class="question-page" style="display:none;text-align:center;padding:40px 24px;background:#f5f1ea;min-height:100vh;box-sizing:border-box;">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
+        <button onclick="prevQuestion()" style="background:none;border:none;font-size:22px;color:#333;">←</button>
+        <span style="font-size:18px;color:#666;">22 / 24</span>
+        <span style="font-size:16px;color:#888;">DogTi</span>
+    </div>
+    <div style="width:100%;height:4px;background:#ddd;border-radius:2px;margin-bottom:40px;">
+        <div style="width:calc(22/24*100%);height:4px;background:#444;border-radius:2px;"></div>
+    </div>
+    <div style="margin:0 auto 16px;max-width:220px;">
+        <img src="dog-question.jpg" alt="小狗" style="width:100%;"/>
+    </div>
+    <p style="font-size:15px;color:#555;margin:0 0 12px;">22 · 倾诉</p>
+    <h2 style="font-size:32px;color:#222;margin:0 0 48px;line-height:1.4;">心里有秘密，你会？</h2>
+    <div style="text-align:left;max-width:600px;margin:0 auto;">
+        <div class="option" onclick="selectOption(22,0)" style="border:1px solid #d9d4cb;border-radius:12px;padding:20px;margin-bottom:16px;cursor:pointer;font-size:18px;display:flex;gap:12px;align-items:center;">
+            <span style="width:16px;height:16px;border:1px solid #999;border-radius:50%;display:inline-block;"></span>
+            找信任的人全盘说出
+        </div>
+        <div class="option" onclick="selectOption(22,1)" style="border:1px solid #d9d4cb;border-radius:12px;padding:20px;margin-bottom:16px;cursor:pointer;font-size:18px;display:flex;gap:12px;align-items:center;">
+            <span style="width:16px;height:16px;border:1px solid #999;border-radius:50%;display:inline-block;"></span>
+            选择性只讲一部分
+        </div>
+        <div class="option" onclick="selectOption(22,2)" style="border:1px solid #d9d4cb;border-radius:12px;padding:20px;margin-bottom:16px;cursor:pointer;font-size:18px;display:flex;gap:12px;align-items:center;">
+            <span style="width:16px;height:16px;border:1px solid #999;border-radius:50%;display:inline-block;"></span>
+            埋心底，谁也不说
+        </div>
+    </div>
+</div>
+
+<!-- ========== Q23 ========== -->
+<div id="q23" class="question-page" style="display:none;text-align:center;padding:40px 24px;background:#f5f1ea;min-height:100vh;box-sizing:border-box;">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
+        <button onclick="prevQuestion()" style="background:none;border:none;font-size:22px;color:#333;">←</button>
+        <span style="font-size:18px;color:#666;">23 / 24</span>
+        <span style="font-size:16px;color:#888;">DogTi</span>
+    </div>
+    <div style="width:100%;height:4px;background:#ddd;border-radius:2px;margin-bottom:40px;">
+        <div style="width:calc(23/24*100%);height:4px;background:#444;border-radius:2px;"></div>
+    </div>
+    <div style="margin:0 auto 16px;max-width:220px;">
+        <img src="dog-question.jpg" alt="小狗" style="width:100%;"/>
+    </div>
+    <p style="font-size:15px;color:#555;margin:0 0 12px;">23 · 计划B</p>
+    <h2 style="font-size:32px;color:#222;margin:0 0 48px;line-height:1.4;">计划被打乱，你的反应？</h2>
+    <div style="text-align:left;max-width:600px;margin:0 auto;">
+        <div class="option" onclick="selectOption(23,0)" style="border:1px solid #d9d4cb;border-radius:12px;padding:20px;margin-bottom:16px;cursor:pointer;font-size:18px;display:flex;gap:12px;align-items:center;">
+            <span style="width:16px;height:16px;border:1px solid #999;border-radius:50%;display:inline-block;"></span>
+            有点烦躁，快速调整新方案
+        </div>
+        <div class="option" onclick="selectOption(23,1)" style="border:1px solid #d9d4cb;border-radius:12px;padding:20px;margin-bottom:16px;cursor:pointer;font-size:18px;display:flex;gap:12px;align-items:center;">
+            <span style="width:16px;height:16px;border:1px solid #999;border-radius:50%;display:inline-block;"></span>
+            顺势接受，随缘变化
+        </div>
+        <div class="option" onclick="selectOption(23,2)" style="border:1px solid #d9d4cb;border-radius:12px;padding:20px;margin-bottom:16px;cursor:pointer;font-size:18px;display:flex;gap:12px;align-items:center;">
+            <span style="width:16px;height:16px;border:1px solid #999;border-radius:50%;display:inline-block;"></span>
+            会失落一阵子
+        </div>
+    </div>
+</div>
+
+<!-- ========== Q24 ========== -->
+<div id="q24" class="question-page" style="display:none;text-align:center;padding:40px 24px;background:#f5f1ea;min-height:100vh;box-sizing:border-box;">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
+        <button onclick="prevQuestion()" style="background:none;border:none;font-size:22px;color:#333;">←</button>
+        <span style="font-size:18px;color:#666;">24 / 24</span>
+        <span style="font-size:16px;color:#888;">DogTi</span>
+    </div>
+    <div style="width:100%;height:4px;background:#ddd;border-radius:2px;margin-bottom:40px;">
+        <div style="width:calc(24/24*100%);height:4px;background:#444;border-radius:2px;"></div>
+    </div>
+    <div style="margin:0 auto 16px;max-width:220px;">
+        <img src="dog-question.jpg" alt="小狗" style="width:100%;"/>
+    </div>
+    <p style="font-size:15px;color:#555;margin:0 0 12px;">24 · 自我</p>
+    <h2 style="font-size:32px;color:#222;margin:0 0 48px;line-height:1.4;">你更在意？</h2>
+    <div style="text-align:left;max-width:600px;margin:0 auto;">
+        <div class="option" onclick="selectOption(24,0)" style="border:1px solid #d9d4cb;border-radius:12px;padding:20px;margin-bottom:16px;cursor:pointer;font-size:18px;display:flex;gap:12px;align-items:center;">
+            <span style="width:16px;height:16px;border:1px solid #999;border-radius:50%;display:inline-block;"></span>
+            自我感受优先
+        </div>
+        <div class="option" onclick="selectOption(24,1)" style="border:1px solid #d9d4cb;border-radius:12px;padding:20px;margin-bottom:16px;cursor:pointer;font-size:18px;display:flex;gap:12px;align-items:center;">
+            <span style="width:16px;height:16px;border:1px solid #999;border-radius:50%;display:inline-block;"></span>
+            他人的看法感受
+        </div>
+        <div class="option" onclick="selectOption(24,2)" style="border:1px solid #d9d4cb;border-radius:12px;padding:20px;margin-bottom:16px;cursor:pointer;font-size:18px;display:flex;gap:12px;align-items:center;">
+            <span style="width:16px;height:16px;border:1px solid #999;border-radius:50%;display:inline-block;"></span>
+            尽量两者平衡
+        </div>
+    </div>
+</div>
+
+<!-- ========== 结果页占位（你原有JS会控制这里显示） ========== -->
+<div id="result-page" style="display:none;text-align:center;padding:50px 24px;background:#f5f1ea;min-height:100vh;box-sizing:border-box;">
+    <h2 style="font-size:30px;margin-bottom:20px;">你的小狗人格</h2>
+    <div id="result-text" style="font-size:17px;line-height:1.7;margin-bottom:40px;"></div>
+    <button class="btn" onclick="showEndPage()">前往结尾页</button>
+</div>
+
+<!-- ========== 【最末尾：结尾感谢页，插入end.jpg图片】 ========== -->
+<div id="end-page" style="display:none;text-align:center;padding:60px 24px;background:#f5f1ea;min-height:100vh;box-sizing:border-box;">
+    <p style="font-size:15px;color:#666;margin-bottom:8px;letter-spacing:1px;">
+        感谢天使宝宝的投喂，鸣谢位等待你来(´・ω・｀)爱你呀欧尼
+    </p>
+    <div style="margin:32px auto;max-width:420px;">
+        <img src="end.jpg" alt="结尾图片" style="width:100%;display:block;border-radius:12px;box-shadow:0 10px 30px rgba(0,0,0,0.12);" />
+    </div>
+    <p style="font-size:13px;color:#888;margin-top:24px;">
+        测试完成，谢谢你的参与
+    </p>
+</div>
+
+<script>
+// 基础配套JS（和你页面匹配）
+let answers = [];
+const total = 24;
+
+// 隐藏全部页面
+function hideAllPages(){
+    document.querySelectorAll('#start-page,.question-page,#result-page,#end-page').forEach(p=>{
+        p.style.display='none';
+    })
+}
+
+// 开始按钮跳转第一题
+document.getElementById('startBtn').addEventListener('click',()=>{
+    hideAllPages();
+    document.getElementById('q1').style.display='block';
+})
+
+// 选择选项
+function selectOption(qIdx,optIdx){
+    answers[qIdx]=optIdx;
+    // 选项选中样式
+    const page=document.getElementById('q'+qIdx);
+    page.querySelectorAll('.option').forEach(o=>o.classList.remove('selected'));
+    event.currentTarget.classList.add('selected');
+
+    // 跳到下一题
+    const next=qIdx+1;
+    hideAllPages();
+    if(next>total){
+        document.getElementById('result-page').style.display='block';
+        return;
+    }
+    document.getElementById('q'+next).style.display='block';
+}
+
+// 返回上一题
+function prevQuestion(){
+    const currId=document.querySelector('.question-page[style*="display: block"]').id;
+    const curr=Number(currId.replace('q',''));
+    hideAllPages();
+    const prev=curr-1;
+    if(prev<1){
+        document.getElementById('start-page').style.display='block';
+        return;
+    }
+    document.getElementById('q'+prev).style.display='block';
+}
+
+// 跳转到结尾页
+function showEndPage(){
+    hideAllPages();
+    document.getElementById('end-page').style.display='block';
+}
+</script>
