@@ -7,29 +7,28 @@
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:"system-ui","PingFang SC","Microsoft YaHei",sans-serif;}
 body{background:#f5f1ea;color:#222;padding:0;min-height:100vh;}
-.wrapper{max-width:420px;margin:0 auto;background:#fff;min-height:100vh;padding:24px;}
 
 /* 开始页（带封面图片） */
-#start-page{text-align:center;padding-top:40px;}
-.cover-img{width:100%;border-radius:18px;box-shadow:0 10px 30px rgba(0,0,0,0.12);margin-bottom:24px;}
+#start-page{text-align:center;padding:40px 20px;min-height:100vh;}
+.cover-img{max-width:360px;width:100%;border-radius:18px;box-shadow:0 10px 30px rgba(0,0,0,0.12);margin-bottom:24px;}
 #start-page h1{font-size:28px;margin-bottom:12px;}
-#start-page p{color:#666;margin-bottom:40px;line-height:1.6;}
+#start-page p{color:#666;margin-bottom:40px;line-height:1.6;max-width:420px;margin-left:auto;margin-right:auto;}
 
-.btn{width:100%;padding:14px 0;background:#222;color:#fff;border:none;border-radius:10px;font-size:16px;cursor:pointer;margin:8px 0;transition:0.2s;}
+.btn{width:100%;max-width:320px;padding:14px 0;background:#222;color:#fff;border:none;border-radius:10px;font-size:16px;cursor:pointer;margin:8px auto;transition:0.2s;display:block;}
 .btn:active{opacity:0.85;}
 .btn.secondary{background:#6c757d;}
 
 /* 答题页面，每题中间题目图片 */
-#quiz-page{display:none;}
+#quiz-page{display:none;padding:30px 20px;min-height:100vh;max-width:420px;margin:0 auto;}
 .question-img{max-width:200px;margin:0 auto 16px;display:block;border-radius:12px;}
 .progress-text{text-align:center;color:#888;margin-bottom:12px;}
-.question{font-size:18px;font-weight:500;margin-bottom:28px;line-height:1.6;}
+.question{font-size:18px;font-weight:500;margin-bottom:28px;line-height:1.6;text-align:center;}
 .option{padding:16px 14px;border:1px solid #ddd;border-radius:10px;margin-bottom:12px;cursor:pointer;transition:0.15s;}
 .option:hover{background:#f4f4f6;border-color:#aaa;}
 .option:active{background:#ececf0;}
 
 /* 结果页 */
-#result-page{display:none;text-align:center;}
+#result-page{display:none;padding:30px 20px;min-height:100vh;max-width:420px;margin:0 auto;text-align:center;}
 .result-img{width:140px;height:140px;margin:20px auto;border-radius:12px;background:#eee;display:flex;align-items:center;justify-content:center;font-size:60px;}
 .result-title{font-size:24px;font-weight:bold;margin:12px 0 6px;}
 .result-subtitle{color:#777;margin-bottom:24px;}
@@ -40,7 +39,7 @@ body{background:#f5f1ea;color:#222;padding:0;min-height:100vh;}
 #shareCanvas{border-radius:12px;max-width:100%;box-shadow:0 2px 10px #00000015}
 
 /* 结尾图片页面 */
-#end-page{display:none;text-align:center;padding-top:80px;}
+#end-page{display:none;text-align:center;padding:40px 20px;min-height:100vh;max-width:420px;margin:0 auto;}
 .end-tip{font-size:15px;color:#666;margin-bottom:30px;}
 .end-img-wrap{margin:0 auto 30px;max-width:340px;}
 .end-img-wrap img{width:100%;border-radius:12px;box-shadow:0 10px 30px rgba(0,0,0,0.12);}
@@ -49,7 +48,6 @@ body{background:#f5f1ea;color:#222;padding:0;min-height:100vh;}
 </style>
 </head>
 <body>
-<div class="wrapper">
 
     <!-- 开始页面【带封面dog-cover.jpg】 -->
     <div id="start-page">
@@ -92,9 +90,10 @@ body{background:#f5f1ea;color:#222;padding:0;min-height:100vh;}
         <button class="btn secondary" id="backToResultBtn">返回结果页</button>
     </div>
 
-</div>
-
 <script>
+// 等待DOM全部加载完毕，再绑定全部按钮事件，修复点不动BUG
+document.addEventListener('DOMContentLoaded', function(){
+
 // ========== 24道完整题目 ==========
 const questions = [
     {q:"休息的时候你更偏向？",opts:[
@@ -425,6 +424,8 @@ document.getElementById("backToResultBtn").onclick = function(){
     hideAllPage();
     resultPage.style.display="block";
 }
+
+}); // DOMContentLoaded结束
 </script>
 </body>
 </html>
