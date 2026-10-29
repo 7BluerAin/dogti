@@ -41,12 +41,41 @@ body{background:#f7f7f9;color:#222;padding:0;min-height:100vh;}
 <body>
 <div class="wrapper">
 
-    <!-- 开始页面 -->
-    <div id="start-page">
-        <h1>测测你是什么小狗 🐕</h1>
-        <p>共24道小题，测出专属你的小狗人格，生成结果海报保存分享</p>
-        <button class="btn" id="startBtn">开始测试</button>
+<!-- 开始页面 -->
+<div id="start-page" style="text-align:center;padding:56px 28px 40px;background:#f5f1ea;min-height:100vh;">
+
+    <!-- 顶部小标题 -->
+    <div style="font-size:13px;color:#666;letter-spacing:2px;margin-bottom:18px;">
+        测测你是什么小狗
     </div>
+
+    <!-- 插入第二张小狗图 -->
+    <div style="margin:0 auto 24px;max-width:360px;border-radius:18px;overflow:hidden;box-shadow:0 10px 30px rgba(0,0,0,0.12);">
+        <img src="dog-cover.jpg" alt="小狗封面" style="width:100%;display:block;" />
+    </div>
+
+    <!-- 主标题 -->
+    <h1 style="font-size:34px;font-weight:800;color:#222;margin-bottom:10px;letter-spacing:1px;">
+        dogti
+    </h1>
+
+    <!-- 副标题 -->
+    <p style="font-size:16px;color:#444;margin-bottom:32px;">
+        测测你是什么小狗 (´・ω・｀)
+    </p>
+
+    <!-- 开始按钮 -->
+    <button class="btn" id="startBtn" style="background:#222;color:#fff;border:none;border-radius:999px;padding:14px 48px;font-size:16px;cursor:pointer;letter-spacing:2px;">
+        开始测试
+    </button>
+
+    <!-- 说明文字 -->
+    <div style="margin-top:18px;font-size:12px;color:#888;line-height:1.6;">
+        24题 测出你的小狗人格<br/>
+        已有 00,000 人测试
+    </div>
+</div>
+
 
     <!-- 答题页面 -->
     <div id="quiz-page">
